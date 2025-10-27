@@ -85,6 +85,25 @@ class DashboardController extends Controller
     public function feedback()
     {
         $user = auth()->user();
-        return view('user.feedback', compact('user'));
+        $feedbacks = $user->feedback()->latest()->get();
+        return view('user.feedback', compact('user', 'feedbacks'));
+    }
+
+    public function storeFeedback(Request $request)
+    {
+        $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'category' => 'required|string',
+            'message' => 'required|string|max:2000',
+        ]);
+
+        auth()->user()->feedback()->create([
+            'rating' => $request->rating,
+            'category' => $request->category,
+            'message' => $request->message,
+            'status' => 'new',
+        ]);
+
+        return redirect()->route('user.feedback')->with('success', 'Merci pour votre commentaire !');
     }
 }

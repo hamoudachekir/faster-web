@@ -585,18 +585,18 @@
 </section>
 
 <!-- Download App Section -->
-<section id="download" class="py-20 bg-gray-900 text-white">
+<section id="download" class="py-20 bg-gray-800 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6">
                     Téléchargez l'application Faster
                 </h2>
-                <p class="text-xl text-gray-300 mb-8">
+                <p class="text-xl text-gray-100 mb-8">
                     Disponible sur iOS et Android. Commandez, suivez et payez en toute simplicité.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#" class="flex items-center px-6 py-3 bg-black rounded-xl hover:bg-gray-800 transition">
+                    <a href="#" class="flex items-center px-6 py-3 bg-gray-900 rounded-xl hover:bg-black transition">
                         <svg class="w-8 h-8 mr-3 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
                         </svg>
@@ -605,7 +605,7 @@
                             <div class="text-lg font-bold">App Store</div>
                         </div>
                     </a>
-                    <a href="#" class="flex items-center px-6 py-3 bg-black rounded-xl hover:bg-gray-800 transition">
+                    <a href="#" class="flex items-center px-6 py-3 bg-gray-900 rounded-xl hover:bg-black transition">
                         <svg class="w-8 h-8 mr-3 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z"/>
                         </svg>
@@ -618,11 +618,9 @@
             </div>
             
             <div class="hidden md:block" data-aos="fade-left">
-                <div class="relative">
-                    <div class="w-64 h-64 mx-auto bg-gradient-to-br from-[#2BD834]/20 to-[#0000ff]/20 rounded-3xl flex items-center justify-center transform rotate-6 hover:rotate-0 transition-transform duration-500">
-                        <svg class="w-32 h-32 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                        </svg>
+                <div class="relative perspective-1200">
+                    <div class="w-80 h-96 mx-auto bg-gradient-to-br from-[#2BD834]/10 to-[#0000ff]/10 rounded-3xl flex items-center justify-center transform hover:scale-105 transition-all duration-500 shadow-2xl" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.3">
+                        <img src="{{ asset('images/app1.svg') }}" alt="Faster App" class="w-64 h-auto object-contain">
                     </div>
                 </div>
             </div>
@@ -645,18 +643,27 @@
         duration: 800,
         once: true,
     });
-        // Optional: light parallax on mouse move for hero background circles
-        const hero = document.currentScript.closest('section') || document.querySelector('section');
-        const layers = document.querySelectorAll('[data-parallax]');
-        window.addEventListener('mousemove', (e) => {
-            const { innerWidth:w, innerHeight:h } = window;
-            const rx = (e.clientX - w/2) / w;
-            const ry = (e.clientY - h/2) / h;
-            layers.forEach((el, i) => {
-                const depth = (i+1) * 10;
-                el.style.transform = `translate3d(${rx*depth}px, ${ry*depth}px, 0)`;
-            });
+    
+    // Initialize VanillaTilt for 3D phone showcase
+    VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+        max: 15,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.3,
+    });
+    
+    // Optional: light parallax on mouse move for hero background circles
+    const hero = document.currentScript.closest('section') || document.querySelector('section');
+    const layers = document.querySelectorAll('[data-parallax]');
+    window.addEventListener('mousemove', (e) => {
+        const { innerWidth:w, innerHeight:h } = window;
+        const rx = (e.clientX - w/2) / w;
+        const ry = (e.clientY - h/2) / h;
+        layers.forEach((el, i) => {
+            const depth = (i+1) * 10;
+            el.style.transform = `translate3d(${rx*depth}px, ${ry*depth}px, 0)`;
         });
+    });
 </script>
 
 @endsection

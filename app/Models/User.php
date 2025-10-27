@@ -50,4 +50,9 @@ class User extends Authenticatable
             'is_active' => 'boolean',
         ];
     }
+
+    public function feedback()
+    {
+        return $this->hasMany(UserFeedback::class);
+    }
 }

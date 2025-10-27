@@ -403,7 +403,7 @@
                     </button>
 
                     <h2 class="text-3xl font-bold text-gray-900 mb-6">
-                        Vehicle_infos
+                        vehicle info
                     </h2>
 
                     <div class="space-y-6" x-show="hasVehicle">

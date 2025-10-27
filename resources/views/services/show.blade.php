@@ -272,28 +272,28 @@
 </section>
 
 <!-- Download App Section -->
-<section id="download" class="py-20 bg-gray-900 text-white">
+<section id="download" class="py-20 bg-gray-800 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6">
                     Téléchargez l'application Faster
                 </h2>
-                <p class="text-xl text-gray-300 mb-8">
+                <p class="text-xl text-gray-100 mb-8">
                     Disponible sur iOS et Android
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#" class="flex items-center px-6 py-3 bg-black rounded-xl hover:bg-gray-800 transition">
+                    <a href="#" class="flex items-center px-6 py-3 bg-black/50 rounded-xl hover:bg-black/70 transition">
                         <span class="text-3xl mr-3">🍎</span>
                         <div>
-                            <div class="text-xs">Télécharger sur</div>
+                            <div class="text-xs text-gray-100">Télécharger sur</div>
                             <div class="text-lg font-bold">App Store</div>
                         </div>
                     </a>
-                    <a href="#" class="flex items-center px-6 py-3 bg-black rounded-xl hover:bg-gray-800 transition">
+                    <a href="#" class="flex items-center px-6 py-3 bg-black/50 rounded-xl hover:bg-black/70 transition">
                         <span class="text-3xl mr-3">🤖</span>
                         <div>
-                            <div class="text-xs">Disponible sur</div>
+                            <div class="text-xs text-gray-100">Disponible sur</div>
                             <div class="text-lg font-bold">Google Play</div>
                         </div>
                     </a>
@@ -301,8 +301,10 @@
             </div>
             
             <div class="hidden md:block" data-aos="fade-left">
-                <div class="text-center">
-                    <div class="text-9xl">📱</div>
+                <div class="relative perspective-1200">
+                    <div class="w-80 h-96 mx-auto bg-gradient-to-br from-[#2BD834]/10 to-[#0000ff]/10 rounded-3xl flex items-center justify-center transform hover:scale-105 transition-all duration-500 shadow-2xl" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.3">
+                        <img src="{{ asset('images/app1.svg') }}" alt="Faster App" class="w-64 h-auto object-contain">
+                    </div>
                 </div>
             </div>
         </div>
@@ -312,10 +314,23 @@
 <!-- AOS Animation Library -->
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<!-- VanillaTilt for 3D tilt effects -->
+<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+<style>
+    .perspective-1200{perspective:1200px}
+</style>
 <script>
     AOS.init({
         duration: 800,
         once: true,
+    });
+    
+    // Initialize VanillaTilt for 3D phone showcase
+    VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+        max: 15,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.3,
     });
 </script>
 

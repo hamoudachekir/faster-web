@@ -174,13 +174,18 @@
     <div class="lg:col-span-1 space-y-6">
         <!-- Status Card -->
         <div class="bg-white rounded-2xl shadow-lg p-6">
-            <h3 class="text-lg font-bold text-gray-900 mb-4">Statut du compte</h3>
+            <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-[#2BD834]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Statut du compte
+            </h3>
             
             @if($user->is_active)
                 <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
                     <div class="flex items-center">
-                        <svg class="w-8 h-8 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        <svg class="w-8 h-8 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                         <div>
                             <p class="font-bold text-green-900">Compte Actif</p>
@@ -193,7 +198,7 @@
                     @csrf
                     <button type="submit" class="w-full px-4 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition flex items-center justify-center">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                         Désactiver le compte
                     </button>
@@ -201,8 +206,8 @@
             @else
                 <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
                     <div class="flex items-center">
-                        <svg class="w-8 h-8 text-red-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                        <svg class="w-8 h-8 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                         <div>
                             <p class="font-bold text-red-900">Compte Désactivé</p>
@@ -225,15 +230,20 @@
         
         <!-- Reset Password Card -->
         <div class="bg-white rounded-2xl shadow-lg p-6">
-            <h3 class="text-lg font-bold text-gray-900 mb-4">Sécurité</h3>
+            <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-[#2BD834]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+                Sécurité
+            </h3>
             
             <form action="{{ route('admin.users.reset-password', $user->id) }}" method="POST" onsubmit="return confirm('Un nouveau mot de passe sera généré et envoyé par email. Continuer ?');">
                 @csrf
-                <button type="submit" class="w-full px-4 py-3 bg-yellow-600 text-white font-bold rounded-lg hover:bg-yellow-700 transition flex items-center justify-center mb-3">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+                <button type="submit" class="w-full px-4 py-3 bg-yellow-500 hover:bg-yellow-600 transition font-bold rounded-lg flex items-center justify-center mb-3">
+                    <svg class="w-5 h-5 mr-2 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                     </svg>
-                    Réinitialiser le mot de passe
+                    <span class="text-gray-900">Réinitialiser le mot de passe</span>
                 </button>
             </form>
             
@@ -244,16 +254,21 @@
         
         <!-- Delete Account Card -->
         <div class="bg-white rounded-2xl shadow-lg p-6 border-2 border-red-200">
-            <h3 class="text-lg font-bold text-red-900 mb-4">Zone de danger</h3>
+            <h3 class="text-lg font-bold text-red-900 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+                Zone de danger
+            </h3>
             
             <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('⚠️ ATTENTION: Cette action est irréversible! Toutes les données de l\'utilisateur seront définitivement supprimées. Êtes-vous absolument sûr ?');">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="w-full px-4 py-3 bg-red-700 text-white font-bold rounded-lg hover:bg-red-800 transition flex items-center justify-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button type="submit" class="w-full px-4 py-3 bg-red-600 hover:bg-red-700 transition font-bold rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                     </svg>
-                    Supprimer définitivement
+                    <span class="text-gray-900">Supprimer définitivement</span>
                 </button>
             </form>
             

@@ -157,12 +157,12 @@
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gray-900 text-white">
+<section class="py-20 bg-gray-800 text-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
         <h2 class="text-4xl md:text-5xl font-bold mb-6">
             Rejoignez l'aventure Faster
         </h2>
-        <p class="text-xl mb-8 text-gray-300">
+        <p class="text-xl mb-8 text-gray-100">
             Que vous soyez utilisateur, conducteur ou partenaire, faites partie de notre histoire
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">

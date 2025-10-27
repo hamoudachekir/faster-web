@@ -55,6 +55,7 @@ Route::prefix('utilisateur')->name('user.')->group(function () {
         Route::get('/promo', [UserDashboardController::class, 'promos'])->name('promos');
         Route::get('/reglages', [UserDashboardController::class, 'settings'])->name('settings');
         Route::get('/commentaires', [UserDashboardController::class, 'feedback'])->name('feedback');
+        Route::post('/commentaires', [UserDashboardController::class, 'storeFeedback'])->name('feedback.store');
     });
 });
 
@@ -126,5 +127,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/users/{id}/toggle-status', [\App\Http\Controllers\Admin\UserController::class, 'toggleStatus'])->name('users.toggle-status');
         Route::post('/users/{id}/reset-password', [\App\Http\Controllers\Admin\UserController::class, 'resetPassword'])->name('users.reset-password');
         Route::delete('/users/{id}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('users.destroy');
+        
+        // User Feedback
+        Route::get('/feedback', [\App\Http\Controllers\Admin\FeedbackController::class, 'index'])->name('feedback.index');
+        Route::get('/feedback/{id}', [\App\Http\Controllers\Admin\FeedbackController::class, 'show'])->name('feedback.show');
+        Route::post('/feedback/{id}/respond', [\App\Http\Controllers\Admin\FeedbackController::class, 'respond'])->name('feedback.respond');
+        Route::delete('/feedback/{id}', [\App\Http\Controllers\Admin\FeedbackController::class, 'destroy'])->name('feedback.destroy');
     });
 });

@@ -11,32 +11,73 @@
 
     <!-- Password Generated Alert -->
     @if(session('generated_password'))
-    <div class="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-2xl shadow-xl p-8 mb-6 border-4 border-green-300">
+    <div class="bg-white rounded-2xl shadow-2xl p-8 mb-6 border-4 border-green-500">
         <div class="flex items-start gap-4">
-            <div class="text-4xl">🔑</div>
+            <div class="flex-shrink-0 w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+                </svg>
+            </div>
             <div class="flex-1">
-                <h3 class="text-2xl font-bold mb-4">Mot de passe généré avec succès !</h3>
-                <div class="bg-white text-gray-900 rounded-xl p-6 mb-4">
-                    <p class="text-sm text-gray-600 mb-2">Utilisateur: <strong>{{ session('user_name') }}</strong></p>
-                    <p class="text-sm text-gray-600 mb-2">Email: <strong>{{ session('user_email') }}</strong></p>
-                    <p class="text-sm text-gray-600 mb-4">Téléphone: <strong>{{ session('user_phone') }}</strong></p>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <svg class="w-6 h-6 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    Mot de passe généré avec succès !
+                </h3>
+                <div class="bg-gray-50 rounded-xl p-6 mb-4 border-2 border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">Utilisateur</p>
+                            <p class="text-sm font-bold text-gray-900">{{ session('user_name') }}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">Email</p>
+                            <p class="text-sm font-bold text-gray-900">{{ session('user_email') }}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 mb-1">Téléphone</p>
+                            <p class="text-sm font-bold text-gray-900">{{ session('user_phone') }}</p>
+                        </div>
+                    </div>
                     <div class="border-t-2 border-gray-200 pt-4">
-                        <p class="text-sm text-gray-600 mb-2">Mot de passe temporaire:</p>
-                        <div class="flex items-center gap-4">
-                            <code class="text-3xl font-bold text-green-600 bg-green-50 px-6 py-3 rounded-lg">{{ session('generated_password') }}</code>
-                            <button onclick="navigator.clipboard.writeText('{{ session('generated_password') }}')" class="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition">
-                                📋 Copier
+                        <p class="text-sm font-semibold text-gray-700 mb-3">Mot de passe temporaire:</p>
+                        <div class="flex items-center gap-3">
+                            <div class="flex-1 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-500 rounded-xl px-6 py-4">
+                                <code class="text-2xl font-bold text-gray-900 tracking-wider">{{ session('generated_password') }}</code>
+                            </div>
+                            <button onclick="navigator.clipboard.writeText('{{ session('generated_password') }}')" class="px-6 py-4 bg-gray-900 hover:bg-gray-800 text-white rounded-xl transition-all duration-200 font-semibold flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-105">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                </svg>
+                                Copier
                             </button>
                         </div>
                     </div>
                 </div>
-                <div class="bg-yellow-100 text-yellow-900 rounded-lg p-4">
-                    <p class="font-semibold mb-2">⚠️ Important:</p>
-                    <ul class="text-sm space-y-1 list-disc list-inside">
-                        <li>Copiez ce mot de passe maintenant, il ne sera plus affiché</li>
-                        <li>Envoyez-le au conducteur par email ou SMS</li>
-                        <li>L'utilisateur pourra le changer après sa première connexion</li>
-                    </ul>
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 rounded-lg p-4">
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 text-yellow-600 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                        <div class="flex-1">
+                            <p class="font-bold text-yellow-900 mb-2">Important - À faire maintenant:</p>
+                            <ul class="text-sm text-yellow-900 space-y-1.5">
+                                <li class="flex items-start">
+                                    <span class="text-yellow-600 mr-2">•</span>
+                                    <span>Copiez ce mot de passe <strong>immédiatement</strong>, il ne sera plus affiché</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-yellow-600 mr-2">•</span>
+                                    <span>Envoyez-le au conducteur par <strong>email ou SMS sécurisé</strong></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-yellow-600 mr-2">•</span>
+                                    <span>Le conducteur pourra le modifier après sa première connexion</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -363,13 +404,16 @@
                 <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
                     <span class="text-xl mr-2">🔑</span> Mot de passe
                 </h3>
-                <p class="text-sm text-gray-600 mb-4">
+                <p class="text-sm text-gray-900 mb-4 leading-relaxed">
                     {{ $application->password ? 'Le conducteur a un mot de passe actif. Générez-en un nouveau si nécessaire.' : 'Aucun mot de passe. Générez des identifiants pour activer le compte.' }}
                 </p>
                 <form action="{{ route('admin.drivers.regenerate-password', $application->id) }}" method="POST" onsubmit="return confirm('⚠️ Confirmer la génération d\'un nouveau mot de passe ? L\'ancien sera invalide.')">
                     @csrf
-                    <button type="submit" class="w-full px-4 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-bold rounded-xl hover:shadow-lg transition text-sm">
-                        🔄 {{ $application->password ? 'Régénérer' : 'Générer' }} le mot de passe
+                    <button type="submit" class="w-full px-4 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-gray-900 font-bold rounded-xl hover:from-purple-700 hover:to-purple-800 hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200 text-sm flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        <span>{{ $application->password ? 'Régénérer' : 'Générer' }} le mot de passe</span>
                     </button>
                 </form>
             </div>

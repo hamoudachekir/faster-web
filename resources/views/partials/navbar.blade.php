@@ -3,8 +3,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
             <!-- Logo -->
-            <a href="{{ route('home') }}" class="flex items-center">
-                <img src="{{ asset('images/faster-logos.png') }}" alt="Faster" class="h-12 w-12 rounded-full object-cover ring-2 ring-[#2BD834] shadow-md">
+            <a href="{{ route('home') }}" class="flex items-center space-x-3 group">
+                <div class="relative">
+                    <img src="{{ asset('images/faster-logos.png') }}" alt="Faster" class="h-14 w-14 object-cover rounded-2xl shadow-md group-hover:shadow-lg transition-all duration-300">
+                </div>
+                <span class="text-2xl font-bold text-gray-900">Faster</span>
             </a>
             
             <!-- Desktop Menu -->
@@ -354,9 +357,11 @@
                         Mon tableau de bord
                     </a>
                 @else
+                    @if(!session('driver_id') && !session('partner_id'))
                     <a href="{{ route('user.register') }}" class="px-6 py-3 bg-gradient-to-r from-[#2BD834] to-[#22b028] text-white rounded-full font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition duration-200">
                         S'inscrire
                     </a>
+                    @endif
                 @endauth
             </div>
             
@@ -387,30 +392,34 @@
                 <a href="{{ route('join.partner') }}" class="block pl-4 py-2 text-gray-600">Devenir Partenaire</a>
             </div>
             @endguest
+            @if(!session('driver_id') && !session('partner_id'))
             <a href="{{ route('about') }}" class="block text-gray-900 font-medium">À propos</a>
             <a href="{{ route('contact') }}" class="block text-gray-900 font-medium">Contact</a>
+            @endif
             @guest
-            <div>
-                <div class="font-semibold text-gray-900 mb-2">Connexion</div>
-                <a href="{{ route('user.login') }}" class="flex items-center pl-4 py-2 text-gray-600">
-                    <svg class="w-4 h-4 mr-2 text-[#2BD834]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                    </svg>
-                    Utilisateur
-                </a>
-                <a href="{{ route('driver.login') }}" class="flex items-center pl-4 py-2 text-gray-600">
-                    <svg class="w-4 h-4 mr-2 text-[#2BD834]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                    </svg>
-                    Espace Conducteur
-                </a>
-                <a href="{{ route('partner.login') }}" class="flex items-center pl-4 py-2 text-gray-600">
-                    <svg class="w-4 h-4 mr-2 text-[#0000ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                    </svg>
-                    Espace Partenaire
-                </a>
-            </div>
+                @if(!session('driver_id') && !session('partner_id'))
+                <div>
+                    <div class="font-semibold text-gray-900 mb-2">Connexion</div>
+                    <a href="{{ route('user.login') }}" class="flex items-center pl-4 py-2 text-gray-600">
+                        <svg class="w-4 h-4 mr-2 text-[#2BD834]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        Utilisateur
+                    </a>
+                    <a href="{{ route('driver.login') }}" class="flex items-center pl-4 py-2 text-gray-600">
+                        <svg class="w-4 h-4 mr-2 text-[#2BD834]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        Espace Conducteur
+                    </a>
+                    <a href="{{ route('partner.login') }}" class="flex items-center pl-4 py-2 text-gray-600">
+                        <svg class="w-4 h-4 mr-2 text-[#0000ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Espace Partenaire
+                    </a>
+                </div>
+                @endif
             @endguest
             @auth
             <!-- Authenticated User Mobile Menu -->
