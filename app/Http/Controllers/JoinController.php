@@ -38,11 +38,12 @@ class JoinController extends Controller
             'city' => 'required|string|max:255',
             
             // Step 3: Vehicle Information
-            'has_vehicle' => 'required|boolean',
-            'vehicle_brand' => 'nullable|required_if:has_vehicle,true|string|max:255',
-            'vehicle_model' => 'nullable|required_if:has_vehicle,true|string|max:255',
-            'vehicle_year' => 'nullable|required_if:has_vehicle,true|integer|min:2000|max:' . (date('Y') + 1),
-            'license_plate' => 'nullable|required_if:has_vehicle,true|string|max:255',
+            'has_vehicle' => 'nullable|boolean',
+            'has_license' => 'nullable|boolean',
+            'vehicle_brand' => 'nullable|required_if:has_vehicle,1|string|max:255',
+            'vehicle_model' => 'nullable|required_if:has_vehicle,1|string|max:255',
+            'vehicle_year' => 'nullable|required_if:has_vehicle,1|integer|min:2000|max:' . (date('Y') + 1),
+            'license_plate' => 'nullable|required_if:has_vehicle,1|string|max:255',
             'license_number' => 'nullable|string|max:255',
             'service_type' => 'required|in:ride,delivery,both',
             
@@ -55,6 +56,10 @@ class JoinController extends Controller
             'vehicle_photo_front' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
             'vehicle_photo_side' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
         ]);
+        
+        // Convert checkbox values
+        $validated['has_vehicle'] = $request->has('has_vehicle') ? true : false;
+        $validated['has_license'] = $request->has('has_license') ? true : false;
         
         // Handle file uploads
         $fileFields = [
@@ -70,6 +75,7 @@ class JoinController extends Controller
         foreach ($fileFields as $field) {
             if ($request->hasFile($field)) {
                 $validated[$field] = $request->file($field)->store('driver-applications', 'public');
+                Log::info('File uploaded successfully', ['field' => $field, 'path' => $validated[$field]]);
             }
         }
         

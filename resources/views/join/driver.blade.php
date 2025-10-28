@@ -273,8 +273,9 @@
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">Numéro de téléphone *</label>
                                 <div class="flex">
-                                    <span class="inline-flex items-center px-3 border border-r-0 border-gray-300 rounded-l-xl bg-gray-50">
-                                        🇹🇳 +216
+                                    <span class="inline-flex items-center gap-2 px-3 border border-r-0 border-gray-300 rounded-l-xl bg-white">
+                                        <img src="{{ asset('images/tunisiac-logo-png-transparent.png') }}" alt="Tunisia" class="w-4 h-4 rounded-sm object-cover">
+                                        <span class="text-gray-900 font-medium text-sm">+216</span>
                                     </span>
                                     <input type="tel" name="phone" value="{{ old('phone') }}" required
                                         class="flex-1 px-4 py-3 border border-gray-300 rounded-r-xl focus:ring-2 focus:ring-[#2BD834] focus:border-transparent transition">
@@ -371,16 +372,15 @@
                         <!-- Delegation / City -->
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2">Délégation *</label>
-                            <input type="text" name="city" value="{{ old('city') }}" required
-                                list="delegations-list"
-                                :placeholder="region ? 'Sélectionnez ou tapez une délégation' : 'Veuillez d\'abord sélectionner une région'"
+                            <select name="city" required
                                 :disabled="!region"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BD834] focus:border-transparent transition disabled:bg-gray-100 disabled:cursor-not-allowed">
-                            <datalist id="delegations-list">
+                                <option value="" x-show="!region">Veuillez d'abord sélectionner une région</option>
+                                <option value="" x-show="region">Sélectionnez votre délégation</option>
                                 <template x-for="delegation in filteredDelegations" :key="delegation">
                                     <option :value="delegation" x-text="delegation"></option>
                                 </template>
-                            </datalist>
+                            </select>
                             @error('city')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                             @enderror

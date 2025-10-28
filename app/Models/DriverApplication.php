@@ -22,6 +22,7 @@ class DriverApplication extends Model
         'vehicle_type',
         'license_number',
         'has_vehicle',
+        'has_license',
         'vehicle_brand',
         'vehicle_model',
         'vehicle_year',
@@ -48,6 +49,7 @@ class DriverApplication extends Model
     {
         return [
             'has_vehicle' => 'boolean',
+            'has_license' => 'boolean',
             'approved_at' => 'datetime',
             'last_login_at' => 'datetime',
         ];

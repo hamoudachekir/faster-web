@@ -114,14 +114,16 @@
                 <button type="submit" class="flex-1 px-6 py-3 bg-gradient-to-r from-[#2BD834] to-[#22b028] text-white font-bold rounded-xl hover:shadow-xl transition">
                     💾 Enregistrer les modifications
                 </button>
-                <form action="{{ route('admin.contacts.destroy', $submission->id) }}" method="POST" class="flex-1" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce message ?')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="w-full px-6 py-3 bg-red-500 text-white font-bold rounded-xl hover:bg-red-600 transition">
-                        🗑️ Supprimer
-                    </button>
-                </form>
             </div>
+        </form>
+        
+        <!-- Separate Delete Form -->
+        <form action="{{ route('admin.contacts.destroy', $submission->id) }}" method="POST" class="mt-4" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce message ?')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="w-full px-6 py-3 bg-red-500 text-white font-bold rounded-xl hover:bg-red-600 transition">
+                🗑️ Supprimer le message
+            </button>
         </form>
     </div>
 </div>
