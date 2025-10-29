@@ -283,7 +283,7 @@
                 L'excellence à votre service
             </h2>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                Découvrez ce qui fait de Faster le leader du transport et de la livraison en Algérie
+                Découvrez ce qui fait de Faster le leader du transport et de la livraison en Tunisie
             </p>
         </div>
         
@@ -372,7 +372,7 @@
                 Ils nous font confiance
             </h2>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                Découvrez les avis de nos utilisateurs satisfaits à travers toute l'Algérie
+                Découvrez les avis de nos utilisateurs satisfaits à travers toute Tunisie
             </p>
         </div>
         
