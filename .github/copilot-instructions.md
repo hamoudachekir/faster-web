@@ -5,7 +5,7 @@ This file tells an AI coding agent what matters to be productive in this Laravel
 - Stack: Laravel 12 (PHP ^8.2), PHPUnit 11, Vite + Tailwind. See `composer.json` and `vite.config.js`.
 
 Core scripts (use these; they encapsulate common flows):
-- Setup: `composer run setup` — installs PHP deps, creates `.env`, `key:generate`, runs migrations, `npm install`, and builds assets.
+- Setup: `composer run setup` — installs PHP deps, creates `.env`, `key:generate`, runs migrations, **seeds the database**, `npm install`, and builds assets.
 - Dev: `composer run dev` — starts `php artisan serve`, queue worker(s) and Vite dev for hot reload.
 - Tests: `composer run test` — runs PHPUnit with in-memory SQLite; CI/tests rely on `phpunit.xml` config.
 
