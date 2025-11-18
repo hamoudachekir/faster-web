@@ -181,8 +181,37 @@
 </section>
 
 <!-- Services Section -->
-<section id="services" class="py-24 bg-gradient-to-b from-white to-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="services" class="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden bg-3d-animated">
+    <!-- 3D Animated Background Layers -->
+    <div class="absolute inset-0 -z-10 pointer-events-none">
+        <!-- Floating Orbs -->
+        <div class="orb-3d orb-3d-1"></div>
+        <div class="orb-3d orb-3d-2"></div>
+        <div class="orb-3d orb-3d-3"></div>
+        
+        <!-- Morphing Shapes -->
+        <div class="morph-shape morph-shape-1"></div>
+        <div class="morph-shape morph-shape-2"></div>
+        
+        <!-- 3D Grid -->
+        <div class="grid-3d"></div>
+        
+        <!-- Particle Dots -->
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        
+        <!-- Wave Layers -->
+        <div class="wave-layer wave-layer-1"></div>
+        <div class="wave-layer wave-layer-2"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center mb-20" data-aos="fade-up">
             <div class="inline-block mb-4">
                 <span class="bg-gradient-to-r from-[#2BD834] to-[#0000ff] text-white text-sm font-bold px-6 py-2 rounded-full">
@@ -266,10 +295,28 @@
 </section>
 
 <!-- Why Faster Section -->
-<section class="py-24 bg-gradient-to-br from-[#0000ff]/5 via-white to-[#2BD834]/5 relative overflow-hidden">
-    <!-- Background Pattern -->
-    <div class="absolute inset-0 opacity-5">
-        <div class="absolute inset-0" style="background-image: radial-gradient(circle, #2BD834 1px, transparent 1px); background-size: 40px 40px;"></div>
+<section class="py-24 bg-gradient-to-br from-[#0000ff]/5 via-white to-[#2BD834]/5 relative overflow-hidden bg-3d-animated">
+    <!-- 3D Animated Background -->
+    <div class="absolute inset-0 -z-10">
+        <!-- Floating Orbs -->
+        <div class="orb-3d orb-3d-1" style="animation-delay: -5s;"></div>
+        <div class="orb-3d orb-3d-2" style="animation-delay: -10s;"></div>
+        <div class="orb-3d orb-3d-3" style="animation-delay: -15s;"></div>
+        
+        <!-- Morphing Shapes -->
+        <div class="morph-shape morph-shape-1" style="animation-delay: -3s;"></div>
+        <div class="morph-shape morph-shape-2" style="animation-delay: -8s;"></div>
+        
+        <!-- 3D Grid -->
+        <div class="grid-3d"></div>
+        
+        <!-- Particle Dots -->
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
     </div>
     
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -356,12 +403,34 @@
 </section>
 
 <!-- Testimonials Section -->
-<section class="py-24 bg-white relative overflow-hidden">
-    <!-- Background Decoration -->
-    <div class="absolute top-0 left-0 w-96 h-96 bg-[#2BD834]/10 rounded-full filter blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-[#0000ff]/10 rounded-full filter blur-3xl"></div>
+<section class="py-24 bg-white relative overflow-hidden bg-3d-animated">
+    <!-- 3D Animated Background -->
+    <div class="absolute inset-0 -z-10 pointer-events-none">
+        <!-- Floating Orbs -->
+        <div class="orb-3d orb-3d-1" style="animation-delay: -8s;"></div>
+        <div class="orb-3d orb-3d-2" style="animation-delay: -12s;"></div>
+        <div class="orb-3d orb-3d-3" style="animation-delay: -6s;"></div>
+        
+        <!-- Morphing Shapes -->
+        <div class="morph-shape morph-shape-1" style="animation-delay: -4s;"></div>
+        <div class="morph-shape morph-shape-2" style="animation-delay: -9s;"></div>
+        
+        <!-- 3D Grid -->
+        <div class="grid-3d"></div>
+        
+        <!-- Particle Dots -->
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        <div class="particle-dot"></div>
+        
+        <!-- Wave Layers -->
+        <div class="wave-layer wave-layer-1"></div>
+        <div class="wave-layer wave-layer-2"></div>
+    </div>
     
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div class="text-center mb-20" data-aos="fade-up">
             <div class="inline-block mb-4">
                 <span class="bg-gradient-to-r from-[#2BD834] to-[#0000ff] text-white text-sm font-bold px-6 py-2 rounded-full">
