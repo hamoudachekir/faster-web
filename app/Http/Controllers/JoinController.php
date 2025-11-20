@@ -47,14 +47,14 @@ class JoinController extends Controller
             'license_number' => 'nullable|string|max:255',
             'service_type' => 'required|in:ride,delivery,both',
             
-            // Step 4: Documents
-            'profile_photo' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
-            'license_front' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
-            'license_back' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
-            'vehicle_registration_front' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
-            'vehicle_registration_back' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
-            'vehicle_photo_front' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
-            'vehicle_photo_side' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
+            // Step 4: Documents (increased to 10MB per file)
+            'profile_photo' => 'nullable|image|mimes:jpeg,jpg,png|max:10240',
+            'license_front' => 'nullable|image|mimes:jpeg,jpg,png|max:10240',
+            'license_back' => 'nullable|image|mimes:jpeg,jpg,png|max:10240',
+            'vehicle_registration_front' => 'nullable|image|mimes:jpeg,jpg,png|max:10240',
+            'vehicle_registration_back' => 'nullable|image|mimes:jpeg,jpg,png|max:10240',
+            'vehicle_photo_front' => 'nullable|image|mimes:jpeg,jpg,png|max:10240',
+            'vehicle_photo_side' => 'nullable|image|mimes:jpeg,jpg,png|max:10240',
         ]);
         
         // Convert checkbox values

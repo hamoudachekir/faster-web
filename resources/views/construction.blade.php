@@ -73,9 +73,11 @@
         
         .logo {
             width: 150px;
-            height: auto;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 1rem;
             margin-bottom: 1rem;
-            filter: drop-shadow(0 4px 12px rgba(43, 216, 52, 0.5));
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
         }
         
         .tagline {
@@ -263,7 +265,9 @@
     <div class="overlay">
         <!-- Top Section: Logo -->
         <div class="logo-section">
-            <img src="{{ asset('images/faster-logo.png') }}" alt="Faster Logo" class="logo">
+            <div class="relative inline-block">
+                <img src="{{ asset('images/faster-logos.png') }}" alt="Faster Logo" class="logo">
+            </div>
             <div class="tagline">Transport & Livraison Rapide</div>
         </div>
         

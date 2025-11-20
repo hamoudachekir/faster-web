@@ -1068,10 +1068,18 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <!-- Submit Button (visible only on step 4) -->
+                <div x-show="step === 4" x-transition class="mt-8">
                     <button type="submit"
-                        class="w-full mt-8 px-8 py-4 bg-gradient-to-r from-[#2BD834] to-[#22b028] text-white rounded-full font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition duration-200">
-                        Soumettre ma candidature
+                        class="w-full px-8 py-4 bg-gradient-to-r from-[#2BD834] to-[#22b028] text-white rounded-full font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition duration-200 shadow-lg">
+                        <span class="flex items-center justify-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Soumettre ma candidature
+                        </span>
                     </button>
                 </div>
             </form>

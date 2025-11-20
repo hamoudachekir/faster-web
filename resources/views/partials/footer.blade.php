@@ -5,11 +5,8 @@
             <!-- About -->
             <div>
                 <div class="flex items-center space-x-3 mb-4">
-                    <div class="relative group">
-                        <div class="absolute inset-0 bg-gradient-to-br from-[#2BD834] to-[#22b028] rounded-2xl blur-md opacity-50 group-hover:opacity-75 transition-opacity"></div>
-                        <div class="relative bg-gradient-to-br from-[#2BD834] to-[#22b028] p-2.5 rounded-2xl shadow-xl group-hover:scale-105 transition-transform duration-300">
-                            <img src="{{ asset('images/faster-logos.png') }}" alt="Faster" class="h-12 w-12 object-cover rounded-xl">
-                        </div>
+                    <div class="relative">
+                        <img src="{{ asset('images/faster-logos.png') }}" alt="Faster" class="h-12 w-12 object-cover rounded-2xl shadow-md">
                     </div>
                     <span class="text-2xl font-bold">Faster</span>
                 </div>
