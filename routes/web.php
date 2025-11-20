@@ -20,6 +20,11 @@ use Illuminate\Support\Facades\Route;
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// Site en Construction
+Route::get('/construction', function () {
+    return view('construction');
+})->name('construction');
+
 // Services
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
 
