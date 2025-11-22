@@ -1,0 +1,11 @@
+# Netlify configuration for static HTML site
+[build]
+  # No build command needed - just static files
+  command = "echo 'No build needed'"
+  publish = "."
+
+# Redirect rules (optional)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

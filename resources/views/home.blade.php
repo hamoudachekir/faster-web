@@ -24,8 +24,8 @@
                     <span class="w-2 h-2 bg-[#2BD834] rounded-full mr-2 animate-pulse"></span>
                     <span class="text-sm font-semibold">Disponible 24/7</span>
                 </div>
-                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-8">
-                    L'application qui fera <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#2BD834] to-white">la différence</span>
+                <h1 id="animated-title" class="text-4xl md:text-6xl font-extrabold leading-tight mb-8 cursor-default relative text-white">
+                    L'application qui fera la différence
                 </h1>
                 
                 <!-- Key Features -->
@@ -733,6 +733,26 @@
             el.style.transform = `translate3d(${rx*depth}px, ${ry*depth}px, 0)`;
         });
     });
+    
+    // Green light follows mouse on title
+    const animatedTitle = document.getElementById('animated-title');
+    if (animatedTitle) {
+        animatedTitle.addEventListener('mousemove', (e) => {
+            const rect = animatedTitle.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            
+            animatedTitle.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(43, 216, 52, 0.8) 0%, rgba(255, 255, 255, 1) 25%)`;
+            animatedTitle.style.webkitBackgroundClip = 'text';
+            animatedTitle.style.backgroundClip = 'text';
+            animatedTitle.style.webkitTextFillColor = 'transparent';
+        });
+        
+        animatedTitle.addEventListener('mouseleave', () => {
+            animatedTitle.style.background = 'none';
+            animatedTitle.style.webkitTextFillColor = 'white';
+        });
+    }
 </script>
 
 @endsection
