@@ -15,15 +15,6 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
                 <div class="flex items-center mb-6">
-                    <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mr-4">
-                        @if($service->icon === 'car')
-                            <span class="text-4xl">🚗</span>
-                        @elseif($service->icon === 'truck')
-                            <span class="text-4xl">🚚</span>
-                        @else
-                            <span class="text-4xl">💼</span>
-                        @endif
-                    </div>
                     <h1 class="text-5xl md:text-6xl font-bold">
                         {{ $service->name }}
                     </h1>
@@ -38,14 +29,20 @@
                 </a>
             </div>
             
-            <div class="hidden md:block" data-aos="fade-left">
-                <div class="w-full h-96 bg-white/10 backdrop-blur rounded-3xl flex items-center justify-center">
-                    @if($service->icon === 'car')
-                        <span class="text-9xl">🚗</span>
+          <div class="hidden md:block" data-aos="fade-left">
+    <div class="w-64 h-80 mx-auto bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-lg rounded-2xl flex items-center justify-center p-6 shadow-xl border border-white/20">
+        @if($service->icon === 'car')
+            <img src="{{ asset('images/faster.jpg') }}" 
+                 alt="Faster Ride" 
+                 class="w-full h-full object-contain rounded-xl">
                     @elseif($service->icon === 'truck')
-                        <span class="text-9xl">🚚</span>
+                                    <img src="{{ asset('images/faster2.jpeg') }}" 
+                 alt="Faster Delivery" 
+                 class="w-full h-full object-contain rounded-xl">
                     @else
-                        <span class="text-9xl">💼</span>
+                        <img src="{{ asset('images/business1.jpeg') }}" 
+                             alt="Faster Business" 
+                             class="w-full h-full object-contain rounded-xl">
                     @endif
                 </div>
             </div>
@@ -159,7 +156,9 @@
                 </ul>
             </div>
             <div class="text-center" data-aos="fade-left">
-                <div class="text-9xl">🚗</div>
+                <div class="w-64 h-80 mx-auto bg-white/10 backdrop-blur rounded-3xl flex items-center justify-center p-6">
+                    <img src="{{ asset('images/driver1.jpeg') }}" alt="Faster Ride" class="w-full h-full object-contain rounded-2xl">
+                </div>
             </div>
         </div>
     </div>
@@ -170,7 +169,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div class="text-center order-2 md:order-1" data-aos="fade-right">
-                <div class="text-9xl">🚚</div>
+                <div class="w-64 h-80 mx-auto bg-white/10 backdrop-blur rounded-3xl flex items-center justify-center p-6">
+                    <img src="{{ asset('images/faster3.jpeg') }}" alt="Faster Delivery" class="w-full h-full object-contain rounded-2xl">
+                </div>
             </div>
             <div class="order-1 md:order-2" data-aos="fade-left">
                 <h2 class="text-4xl font-bold text-gray-900 mb-6">
@@ -249,7 +250,9 @@
                 </ul>
             </div>
             <div class="text-center" data-aos="fade-left">
-                <div class="text-9xl">💼</div>
+                <div class="w-64 h-80 mx-auto bg-white/10 backdrop-blur rounded-3xl flex items-center justify-center p-6">
+                    <img src="{{ asset('images/business2.jpeg') }}" alt="Faster Business" class="w-full h-full object-contain rounded-2xl">
+                </div>
             </div>
         </div>
     </div>
@@ -283,19 +286,15 @@
                     Disponible sur iOS et Android
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#" class="flex items-center px-6 py-3 bg-black/50 rounded-xl hover:bg-black/70 transition">
-                        <span class="text-3xl mr-3">🍎</span>
-                        <div>
-                            <div class="text-xs text-gray-100">Télécharger sur</div>
-                            <div class="text-lg font-bold">App Store</div>
-                        </div>
+                    <a href="#" class="transform hover:scale-105 transition-transform duration-200">
+                        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1276560000" 
+                             alt="Download on the App Store" 
+                             class="h-12 w-auto">
                     </a>
-                    <a href="#" class="flex items-center px-6 py-3 bg-black/50 rounded-xl hover:bg-black/70 transition">
-                        <span class="text-3xl mr-3">🤖</span>
-                        <div>
-                            <div class="text-xs text-gray-100">Disponible sur</div>
-                            <div class="text-lg font-bold">Google Play</div>
-                        </div>
+                    <a href="#" class="transform hover:scale-105 transition-transform duration-200">
+                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" 
+                             alt="Get it on Google Play" 
+                             class="h-12 w-auto">
                     </a>
                 </div>
             </div>
