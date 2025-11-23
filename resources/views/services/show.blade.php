@@ -30,7 +30,7 @@
             </div>
             
           <div class="hidden md:block" data-aos="fade-left">
-    <div class="w-64 h-80 mx-auto bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-lg rounded-2xl flex items-center justify-center p-6 shadow-xl border border-white/20">
+    <div class="w-96 h-[28rem] mx-auto bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-lg rounded-2xl flex items-center justify-center p-6 shadow-xl border border-white/20">
         @if($service->icon === 'car')
             <img src="{{ asset('images/faster.jpg') }}" 
                  alt="Faster Ride" 
@@ -156,7 +156,7 @@
                 </ul>
             </div>
             <div class="text-center" data-aos="fade-left">
-                <div class="w-64 h-80 mx-auto bg-white/10 backdrop-blur rounded-3xl flex items-center justify-center p-6">
+                    <div class="w-96 h-[28rem] mx-auto bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-lg rounded-2xl flex items-center justify-center p-6 shadow-xl border border-white/20">
                     <img src="{{ asset('images/driver1.jpeg') }}" alt="Faster Ride" class="w-full h-full object-contain rounded-2xl">
                 </div>
             </div>
@@ -169,8 +169,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div class="text-center order-2 md:order-1" data-aos="fade-right">
-                <div class="w-64 h-80 mx-auto bg-white/10 backdrop-blur rounded-3xl flex items-center justify-center p-6">
-                    <img src="{{ asset('images/faster3.jpeg') }}" alt="Faster Delivery" class="w-full h-full object-contain rounded-2xl">
+                    <div class="w-96 h-[28rem] mx-auto bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-lg rounded-2xl flex items-center justify-center p-6 shadow-xl border border-white/20">
+                    <img src="{{ asset('images/delivery2.jpg') }}" alt="Faster Delivery" class="w-full h-full object-contain rounded-2xl">
                 </div>
             </div>
             <div class="order-1 md:order-2" data-aos="fade-left">
@@ -250,8 +250,8 @@
                 </ul>
             </div>
             <div class="text-center" data-aos="fade-left">
-                <div class="w-64 h-80 mx-auto bg-white/10 backdrop-blur rounded-3xl flex items-center justify-center p-6">
-                    <img src="{{ asset('images/business2.jpeg') }}" alt="Faster Business" class="w-full h-full object-contain rounded-2xl">
+                <div class="w-96 h-[28rem] mx-auto bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-lg rounded-2xl flex items-center justify-center p-6 shadow-xl border border-white/20">
+                    <img src="{{ asset('images/business2.jpg') }}" alt="Faster Business" class="w-full h-full object-contain rounded-2xl">
                 </div>
             </div>
         </div>
