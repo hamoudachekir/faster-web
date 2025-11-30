@@ -15,9 +15,9 @@
             <table class="w-full">
                 <thead>
                     <tr class="border-b-2 border-gray-200">
-                        <th class="text-left py-3 px-4 font-semibold text-gray-700">Conducteur</th>
+                        <th class="text-left py-3 px-4 font-semibold text-gray-700">Taxi</th>
                         <th class="text-left py-3 px-4 font-semibold text-gray-700">Contact</th>
-                        <th class="text-left py-3 px-4 font-semibold text-gray-700">Ville</th>
+                        <th class="text-left py-3 px-4 font-semibold text-gray-700">Localisation</th>
                         <th class="text-left py-3 px-4 font-semibold text-gray-700">Service</th>
                         <th class="text-left py-3 px-4 font-semibold text-gray-700">Statut</th>
                         <th class="text-left py-3 px-4 font-semibold text-gray-700">Date</th>
@@ -28,14 +28,26 @@
                     @foreach($applications as $application)
                     <tr class="border-b border-gray-100 hover:bg-gray-50">
                         <td class="py-4 px-4">
-                            <div class="font-semibold text-gray-900">{{ $application->first_name }} {{ $application->last_name }}</div>
-                            <div class="text-sm text-gray-600">Permis: {{ $application->license_number }}</div>
+                            <div class="flex items-center gap-3">
+                                @if($application->selfie)
+                                    <img src="{{ asset('storage/' . $application->selfie) }}" alt="{{ $application->first_name }}" class="w-12 h-12 rounded-full object-cover border-2 border-gray-200">
+                                @else
+                                    <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-xl">{{ $application->gender === 'male' ? '👨' : '👩' }}</div>
+                                @endif
+                                <div>
+                                    <div class="font-semibold text-gray-900">{{ $application->first_name }} {{ $application->last_name }}</div>
+                                    <div class="text-xs text-gray-600">{{ $application->gender === 'male' ? 'Homme' : 'Femme' }}</div>
+                                </div>
+                            </div>
                         </td>
                         <td class="py-4 px-4">
-                            <div class="text-sm text-gray-900">{{ $application->email }}</div>
-                            <div class="text-sm text-gray-600">{{ $application->phone }}</div>
+                            <div class="text-sm text-gray-900">📧 {{ $application->email }}</div>
+                            <div class="text-sm text-gray-600">📞 +216 {{ $application->phone }}</div>
                         </td>
-                        <td class="py-4 px-4 text-gray-900">{{ $application->city }}</td>
+                        <td class="py-4 px-4">
+                            <div class="text-sm text-gray-900">{{ $application->city }}</div>
+                            <div class="text-xs text-gray-600">{{ $application->region }}</div>
+                        </td>
                         <td class="py-4 px-4">
                             <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-full">
                                 {{ $application->service_type }}

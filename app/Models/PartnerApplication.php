@@ -8,14 +8,20 @@ class PartnerApplication extends Model
 {
     protected $fillable = [
         'business_name',
+        'business_type',
+        'registration_number',
+        'address',
+        'website',
         'contact_name',
+        'contact_position',
         'email',
         'password',
         'phone',
+        'monthly_rides',
+        'schedule',
+        'schedule_other',
         'city',
         'partner_type',
-        'business_type',
-        'address',
         'description',
         'status',
         'admin_notes',
@@ -30,6 +36,7 @@ class PartnerApplication extends Model
     protected function casts(): array
     {
         return [
+            'schedule' => 'array',
             'approved_at' => 'datetime',
             'last_login_at' => 'datetime',
         ];

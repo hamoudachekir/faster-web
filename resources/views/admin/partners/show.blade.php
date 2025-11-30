@@ -88,7 +88,10 @@
     <!-- Application Details -->
     <div class="bg-white rounded-2xl shadow-lg p-8 mb-6">
         <div class="flex items-center justify-between mb-6">
-            <h2 class="text-3xl font-bold text-gray-900">{{ $application->business_name }}</h2>
+            <div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">{{ $application->business_name }}</h2>
+                <p class="text-sm text-gray-500">🏢 {{ $application->business_type }}</p>
+            </div>
             <span class="px-4 py-2 text-sm font-bold rounded-full
                 {{ $application->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
                 {{ $application->status === 'approved' ? 'bg-green-100 text-green-800' : '' }}
@@ -97,51 +100,147 @@
             </span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-                <h3 class="font-semibold text-gray-700 mb-2">👤 Nom du contact</h3>
-                <p class="text-gray-900">{{ $application->contact_name }}</p>
+        <!-- Section 1: Company Information -->
+        <div class="mb-8">
+            <div class="flex items-center gap-2 mb-4">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                    1
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">Informations de l'entreprise</h3>
             </div>
-            <div>
-                <h3 class="font-semibold text-gray-700 mb-2">📧 Email</h3>
-                <p class="text-gray-900">{{ $application->email }}</p>
-            </div>
-            <div>
-                <h3 class="font-semibold text-gray-700 mb-2">📞 Téléphone</h3>
-                <p class="text-gray-900">{{ $application->phone }}</p>
-            </div>
-            <div>
-                <h3 class="font-semibold text-gray-700 mb-2">🏙️ Ville</h3>
-                <p class="text-gray-900">{{ $application->city }}</p>
-            </div>
-            <div>
-                <h3 class="font-semibold text-gray-700 mb-2">🤝 Type de partenariat</h3>
-                <p class="text-gray-900">{{ $application->partner_type }}</p>
-            </div>
-            <div>
-                <h3 class="font-semibold text-gray-700 mb-2">🏢 Type d'entreprise</h3>
-                <p class="text-gray-900">{{ $application->business_type }}</p>
-            </div>
-            <div class="md:col-span-2">
-                <h3 class="font-semibold text-gray-700 mb-2">📍 Adresse</h3>
-                <p class="text-gray-900">{{ $application->address }}</p>
-            </div>
-            <div>
-                <h3 class="font-semibold text-gray-700 mb-2">📅 Date de candidature</h3>
-                <p class="text-gray-900">{{ $application->created_at->format('d/m/Y à H:i') }}</p>
+            <div class="pl-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">🏢 Nom de l'entreprise</h4>
+                    <p class="text-gray-900 font-medium">{{ $application->business_name }}</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">🏭 Type d'activité</h4>
+                    <p class="text-gray-900">{{ $application->business_type }}</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">📋 Numéro d'immatriculation</h4>
+                    <p class="text-gray-900 font-mono bg-gray-50 px-3 py-2 rounded-lg inline-block">{{ $application->registration_number ?? 'Non renseigné' }}</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">🌐 Site web</h4>
+                    @if($application->website)
+                        <a href="{{ $application->website }}" target="_blank" class="text-blue-600 hover:underline">{{ $application->website }}</a>
+                    @else
+                        <p class="text-gray-400">Non renseigné</p>
+                    @endif
+                </div>
+                <div class="md:col-span-2">
+                    <h4 class="font-semibold text-gray-700 mb-2">📍 Adresse complète</h4>
+                    <p class="text-gray-900 bg-gray-50 px-4 py-3 rounded-lg">{{ $application->address }}</p>
+                </div>
             </div>
         </div>
 
-        @if($application->description)
-        <div class="mt-6 pt-6 border-t border-gray-200">
-            <h3 class="font-semibold text-gray-700 mb-2">💬 Description de l'entreprise</h3>
-            <p class="text-gray-900 whitespace-pre-wrap">{{ $application->description }}</p>
+        <!-- Section 2: Contact Person -->
+        <div class="mb-8 pt-6 border-t border-gray-200">
+            <div class="flex items-center gap-2 mb-4">
+                <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                    2
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">Personne de contact</h3>
+            </div>
+            <div class="pl-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">👤 Nom et prénom</h4>
+                    <p class="text-gray-900 font-medium">{{ $application->contact_name }}</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">💼 Fonction</h4>
+                    <p class="text-gray-900">{{ $application->contact_position ?? 'Non renseignée' }}</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">📞 Téléphone</h4>
+                    <p class="text-gray-900 font-medium">
+                        <span class="text-gray-600">+216</span> {{ $application->phone }}
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">📧 Email professionnel</h4>
+                    <p class="text-gray-900">{{ $application->email }}</p>
+                </div>
+            </div>
         </div>
-        @endif
+
+        <!-- Section 3: Mobility Needs -->
+        <div class="pt-6 border-t border-gray-200">
+            <div class="flex items-center gap-2 mb-4">
+                <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                    3
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">Besoins en mobilité</h3>
+            </div>
+            <div class="pl-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">🚗 Courses mensuelles estimées</h4>
+                    <p class="text-gray-900 font-bold text-lg">
+                        @if($application->monthly_rides === '0-100')
+                            0 - 100 courses
+                        @elseif($application->monthly_rides === '100-500')
+                            100 - 500 courses
+                        @elseif($application->monthly_rides === '500-1000')
+                            500 - 1,000 courses
+                        @elseif($application->monthly_rides === '1000+')
+                            Plus de 1,000 courses
+                        @else
+                            {{ $application->monthly_rides ?? 'Non renseigné' }}
+                        @endif
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-700 mb-2">📅 Horaires de service</h4>
+                    @if($application->schedule && is_array($application->schedule))
+                        <div class="flex flex-wrap gap-2">
+                            @foreach($application->schedule as $time)
+                                <span class="px-3 py-1 bg-gradient-to-r from-[#2BD834] to-[#22b028] text-white text-sm font-semibold rounded-full">
+                                    @if($time === 'heures_bureau')
+                                        🕐 Heures de bureau
+                                    @elseif($time === '24_7')
+                                        🌙 24/7
+                                    @elseif($time === 'weekends')
+                                        📅 Weekends
+                                    @elseif($time === 'autres')
+                                        ⚙️ Autres
+                                    @else
+                                        {{ $time }}
+                                    @endif
+                                </span>
+                            @endforeach
+                        </div>
+                    @else
+                        <p class="text-gray-400">Non renseigné</p>
+                    @endif
+                </div>
+                @if($application->schedule_other)
+                <div class="md:col-span-2">
+                    <h4 class="font-semibold text-gray-700 mb-2">💬 Autres horaires spécifiés</h4>
+                    <p class="text-gray-900 bg-blue-50 px-4 py-3 rounded-lg">{{ $application->schedule_other }}</p>
+                </div>
+                @endif
+            </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="mt-8 pt-6 border-t border-gray-200 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">📅 Date de candidature</h4>
+                <p class="text-gray-900">{{ $application->created_at->format('d/m/Y à H:i') }}</p>
+            </div>
+            @if($application->approved_at)
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">✅ Date d'approbation</h4>
+                <p class="text-gray-900">{{ $application->approved_at->format('d/m/Y à H:i') }}</p>
+            </div>
+            @endif
+        </div>
 
         @if($application->admin_notes)
         <div class="mt-6 pt-6 border-t border-gray-200">
-            <h3 class="font-semibold text-gray-700 mb-2">📝 Notes de l'administrateur</h3>
+            <h4 class="font-semibold text-gray-700 mb-2">📝 Notes de l'administrateur</h4>
             <p class="text-gray-900 whitespace-pre-wrap bg-yellow-50 p-4 rounded-lg">{{ $application->admin_notes }}</p>
         </div>
         @endif

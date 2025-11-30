@@ -81,7 +81,7 @@
                 © {{ date('Y') }} Faster. Tous droits réservés.
             </p>
             <div class="flex space-x-6 mt-4 md:mt-0">
-                <a href="#" class="text-gray-100 hover:text-white text-sm transition">Politique de confidentialité</a>
+                <a href="{{ route('privacy') }}" class="text-gray-100 hover:text-white text-sm transition">Politique de confidentialité</a>
                 <a href="#" class="text-gray-100 hover:text-white text-sm transition">Conditions d'utilisation</a>
                 <a href="#" class="text-gray-100 hover:text-white text-sm transition">Mentions légales</a>
             </div>

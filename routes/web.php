@@ -38,6 +38,11 @@ Route::post('/rejoindre/partenaire', [JoinController::class, 'storePartner'])->n
 // About
 Route::get('/a-propos', [AboutController::class, 'index'])->name('about');
 
+// Privacy Policy
+Route::get('/privacy-policy', function () {
+    return view('privacy');
+})->name('privacy');
+
 // Contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

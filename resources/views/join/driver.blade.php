@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Devenir Conducteur - Faster')
+@section('title', 'Devenir Taxi - Faster')
 
 @section('content')
 
@@ -9,7 +9,7 @@
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="text-center" data-aos="fade-up">
             <h1 class="text-5xl md:text-6xl font-bold mb-6">
-                Devenez Conducteur Faster
+                Devenez Taxi Faster
             </h1>
             <p class="text-xl md:text-2xl text-blue-100">
                 Gagnez de l'argent en toute autonomie
@@ -56,9 +56,40 @@
 </section>
 
 <!-- Application Form -->
-<section class="py-20 bg-gradient-to-br from-gray-50 to-green-50">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12" data-aos="fade-up">
+<section class="py-20 bg-gradient-to-br from-gray-50 to-green-50 relative overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <!-- Multiple floating bubbles with different sizes and positions -->
+        <div class="absolute top-10 left-10 w-72 h-72 bg-gradient-to-br from-[#2BD834]/20 to-[#0000ff]/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-[#0000ff]/15 to-[#2BD834]/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-br from-green-300/20 to-blue-300/15 rounded-full blur-2xl animate-bounce" style="animation-duration: 6s;"></div>
+        
+        <!-- Additional medium bubbles -->
+        <div class="absolute top-1/4 right-1/3 w-48 h-48 bg-gradient-to-br from-[#2BD834]/15 to-green-200/10 rounded-full blur-2xl animate-pulse" style="animation-delay: 2.5s;"></div>
+        <div class="absolute bottom-1/3 left-1/4 w-56 h-56 bg-gradient-to-br from-blue-300/20 to-[#0000ff]/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 3s;"></div>
+        <div class="absolute top-40 right-20 w-40 h-40 bg-gradient-to-br from-green-400/25 to-[#2BD834]/15 rounded-full blur-2xl animate-bounce" style="animation-duration: 8s;"></div>
+        
+        <!-- Small floating bubbles -->
+        <div class="absolute top-20 left-1/2 w-32 h-32 bg-gradient-to-br from-[#0000ff]/20 to-blue-200/15 rounded-full blur-xl animate-pulse" style="animation-delay: 1.5s;"></div>
+        <div class="absolute bottom-40 right-1/4 w-36 h-36 bg-gradient-to-br from-[#2BD834]/25 to-green-300/10 rounded-full blur-2xl animate-pulse" style="animation-delay: 4s;"></div>
+        <div class="absolute top-60 left-20 w-44 h-44 bg-gradient-to-br from-blue-300/15 to-[#0000ff]/20 rounded-full blur-2xl animate-bounce" style="animation-duration: 7s;"></div>
+        <div class="absolute bottom-60 right-40 w-28 h-28 bg-gradient-to-br from-green-200/20 to-[#2BD834]/15 rounded-full blur-xl animate-pulse" style="animation-delay: 2s;"></div>
+        
+        <!-- Tiny accent bubbles -->
+        <div class="absolute top-1/3 left-10 w-20 h-20 bg-gradient-to-br from-[#2BD834]/30 to-green-400/20 rounded-full blur-lg animate-bounce" style="animation-duration: 5s;"></div>
+        <div class="absolute bottom-1/4 right-10 w-24 h-24 bg-gradient-to-br from-[#0000ff]/25 to-blue-300/15 rounded-full blur-xl animate-pulse" style="animation-delay: 3.5s;"></div>
+        
+        <!-- Moving particles -->
+        <div class="absolute w-2 h-2 bg-[#2BD834] rounded-full animate-particle opacity-40" style="top: 20%; left: 10%;"></div>
+        <div class="absolute w-3 h-3 bg-[#0000ff] rounded-full animate-particle opacity-30" style="top: 60%; left: 80%; animation-delay: 2s;"></div>
+        <div class="absolute w-2 h-2 bg-green-400 rounded-full animate-particle opacity-50" style="top: 80%; left: 30%; animation-delay: 4s;"></div>
+        <div class="absolute w-2 h-2 bg-blue-400 rounded-full animate-particle opacity-40" style="top: 40%; left: 70%; animation-delay: 1s;"></div>
+        <div class="absolute w-2 h-2 bg-[#2BD834] rounded-full animate-particle opacity-35" style="top: 50%; left: 15%; animation-delay: 3s;"></div>
+        <div class="absolute w-3 h-3 bg-blue-300 rounded-full animate-particle opacity-45" style="top: 30%; left: 85%; animation-delay: 5s;"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 border border-white/50" data-aos="fade-up">
             
             @if(session('success'))
             <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
@@ -158,7 +189,9 @@
                     this.files[key] = null;
                     document.getElementById(key).value = '';
                 }
-            }" enctype="multipart/form-data">
+            }" 
+            x-init="window.addEventListener('set-step', (e) => { step = e.detail; })"
+            enctype="multipart/form-data">
                 @csrf
                 
                 <!-- Progress Bar -->
@@ -211,15 +244,19 @@
                     </div>
                 </div>                <!-- Step 1: Personal Information -->
                 <div x-show="step === 1" x-transition>
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">
-                        Informations du conducteur
-                    </h2>
+                    <div class="bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                            <span class="w-10 h-10 bg-gradient-to-br from-[#2BD834] to-[#22b028] rounded-full flex items-center justify-center text-white font-bold mr-3">1</span>
+                            Informations du taxi
+                        </h3>
 
                     <div class="space-y-6">
                         <!-- Gender -->
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2">Sexe *</label>
                             <select name="gender" required
+                                oninvalid="this.setCustomValidity('Veuillez sélectionner votre sexe')"
+                                oninput="this.setCustomValidity('')"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BD834] focus:border-transparent transition">
                                 <option value="">Sélectionnez...</option>
                                 <option value="male" {{ old('gender') === 'male' ? 'selected' : '' }}>Homme</option>
@@ -234,6 +271,8 @@
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">Prénom *</label>
                                 <input type="text" name="first_name" value="{{ old('first_name') }}" required
+                                    oninvalid="this.setCustomValidity('Veuillez entrer votre prénom')"
+                                    oninput="this.setCustomValidity('')"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BD834] focus:border-transparent transition">
                                 @error('first_name')
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -243,6 +282,8 @@
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">Nom *</label>
                                 <input type="text" name="last_name" value="{{ old('last_name') }}" required
+                                    oninvalid="this.setCustomValidity('Veuillez entrer votre nom')"
+                                    oninput="this.setCustomValidity('')"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BD834] focus:border-transparent transition">
                                 @error('last_name')
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -254,6 +295,8 @@
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2">Date de naissance *</label>
                             <input type="date" name="date_of_birth" value="{{ old('date_of_birth') }}" required
+                                oninvalid="this.setCustomValidity('Veuillez sélectionner votre date de naissance')"
+                                oninput="this.setCustomValidity('')"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BD834] focus:border-transparent transition">
                             @error('date_of_birth')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -262,8 +305,10 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-gray-700 font-semibold mb-2">Email</label>
-                                <input type="email" name="email" value="{{ old('email') }}"
+                                <label class="block text-gray-700 font-semibold mb-2">Email *</label>
+                                <input type="email" name="email" value="{{ old('email') }}" required
+                                    oninvalid="this.setCustomValidity('Veuillez entrer une adresse email valide')"
+                                    oninput="this.setCustomValidity('')"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BD834] focus:border-transparent transition">
                                 @error('email')
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -277,34 +322,21 @@
                                         <img src="{{ asset('images/tunisiac-logo-png-transparent.png') }}" alt="Tunisia" class="w-4 h-4 rounded-sm object-cover">
                                         <span class="text-gray-900 font-medium text-sm">+216</span>
                                     </span>
-                                    <input type="tel" name="phone" value="{{ old('phone') }}" required
+                                    <input type="tel" name="phone" value="{{ old('phone') }}" required 
+                                        pattern="[0-9]{8}" maxlength="8" minlength="8"
+                                        placeholder="12345678"
+                                        oninvalid="this.setCustomValidity('Veuillez entrer exactement 8 chiffres')"
+                                        oninput="this.setCustomValidity(''); if(this.value.length > 0 && (this.value.length !== 8 || !/^[0-9]{8}$/.test(this.value))) { this.setCustomValidity('Le numéro doit contenir exactement 8 chiffres'); } else { this.setCustomValidity(''); }"
                                         class="flex-1 px-4 py-3 border border-gray-300 rounded-r-xl focus:ring-2 focus:ring-[#2BD834] focus:border-transparent transition">
                                 </div>
+                                <p class="text-xs text-gray-500 mt-1">8 chiffres exactement</p>
                                 @error('phone')
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
-
-                        <!-- RIB -->
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">RIB</label>
-                            <input type="text" name="rib" value="{{ old('rib') }}"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BD834] focus:border-transparent transition">
-                            @error('rib')
-                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
                         <!-- Checkboxes -->
                         <div class="space-y-3">
-                            <label class="flex items-start">
-                                <input type="checkbox" name="has_vehicle" value="1" {{ old('has_vehicle') ? 'checked' : '' }}
-                                    x-model="hasVehicle"
-                                    class="w-5 h-5 text-[#2BD834] border-gray-300 rounded focus:ring-[#2BD834] mt-1">
-                                <span class="ml-3 text-gray-700">J'ai ma propre voiture</span>
-                            </label>
-                            
                             <label class="flex items-start">
                                 <input type="checkbox" name="has_license" value="1" {{ old('has_license') ? 'checked' : '' }}
                                     class="w-5 h-5 text-[#2BD834] border-gray-300 rounded focus:ring-[#2BD834] mt-1">
@@ -313,9 +345,11 @@
                         </div>
 
                         <button type="button" @click="step = 2"
-                            class="w-full px-8 py-4 bg-gradient-to-r from-[#2BD834] to-[#22b028] text-white rounded-full font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition duration-200">
+                            class="w-full px-8 py-4 bg-gradient-to-r from-[#2BD834] to-[#22b028] text-white rounded-full font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition duration-200"
+                            onclick="if(!this.closest('form').querySelector('[name=gender]').checkValidity() || !this.closest('form').querySelector('[name=first_name]').checkValidity() || !this.closest('form').querySelector('[name=last_name]').checkValidity() || !this.closest('form').querySelector('[name=date_of_birth]').checkValidity() || !this.closest('form').querySelector('[name=email]').checkValidity() || !this.closest('form').querySelector('[name=phone]').checkValidity()) { this.closest('form').querySelector('[name=gender]').reportValidity() || this.closest('form').querySelector('[name=first_name]').reportValidity() || this.closest('form').querySelector('[name=last_name]').reportValidity() || this.closest('form').querySelector('[name=date_of_birth]').reportValidity() || this.closest('form').querySelector('[name=email]').reportValidity() || this.closest('form').querySelector('[name=phone]').reportValidity(); return false; }">
                             Continuer
                         </button>
+                    </div>
                     </div>
                 </div>
 
@@ -328,15 +362,19 @@
                         Retour
                     </button>
 
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">
-                        Informations du conducteur
-                    </h2>
+                    <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                            <span class="w-10 h-10 bg-gradient-to-br from-[#2BD834] to-[#22b028] rounded-full flex items-center justify-center text-white font-bold mr-3">2</span>
+                            Localisation
+                        </h3>
 
                     <div class="space-y-6">
                         <!-- Region -->
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2">Région *</label>
                             <select name="region" x-model="region" required
+                                oninvalid="this.setCustomValidity('Veuillez sélectionner votre région')"
+                                oninput="this.setCustomValidity('')"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BD834] focus:border-transparent transition">
                                 <option value="">Sélectionnez votre région</option>
                                 <option value="Tunis">Tunis</option>
@@ -374,6 +412,8 @@
                             <label class="block text-gray-700 font-semibold mb-2">Délégation *</label>
                             <select name="city" required
                                 :disabled="!region"
+                                oninvalid="this.setCustomValidity('Veuillez sélectionner votre délégation')"
+                                oninput="this.setCustomValidity('')"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BD834] focus:border-transparent transition disabled:bg-gray-100 disabled:cursor-not-allowed">
                                 <option value="" x-show="!region">Veuillez d'abord sélectionner une région</option>
                                 <option value="" x-show="region">Sélectionnez votre délégation</option>
@@ -387,9 +427,11 @@
                         </div>
 
                         <button type="button" @click="step = 3"
-                            class="w-full px-8 py-4 bg-gradient-to-r from-[#2BD834] to-[#22b028] text-white rounded-full font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition duration-200">
+                            class="w-full px-8 py-4 bg-gradient-to-r from-[#2BD834] to-[#22b028] text-white rounded-full font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition duration-200"
+                            onclick="if(!this.closest('form').querySelector('[name=region]').checkValidity() || !this.closest('form').querySelector('[name=city]').checkValidity()) { this.closest('form').querySelector('[name=region]').reportValidity() || this.closest('form').querySelector('[name=city]').reportValidity(); return false; }">
                             Continuer
                         </button>
+                    </div>
                     </div>
                 </div>
 
@@ -402,11 +444,13 @@
                         Retour
                     </button>
 
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">
-                        vehicle info
-                    </h2>
+                    <div class="bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                            <span class="w-10 h-10 bg-gradient-to-br from-[#2BD834] to-[#22b028] rounded-full flex items-center justify-center text-white font-bold mr-3">3</span>
+                            Informations du véhicule taxi
+                        </h3>
 
-                    <div class="space-y-6" x-show="hasVehicle">
+                    <div class="space-y-6">
                         <!-- Car Brand -->
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2">Marque *</label>
@@ -493,17 +537,12 @@
                         </div>
                     </div>
 
-                    <!-- No Vehicle Message -->
-                    <div x-show="!hasVehicle" class="text-center py-8">
-                        <div class="text-5xl mb-4">🚗</div>
-                        <p class="text-gray-600 mb-2">Vous n'avez pas de véhicule ?</p>
-                        <p class="text-sm text-gray-500">Pas de problème ! Nous pouvons vous aider à trouver une solution.</p>
-                    </div>
-
                     <!-- Service Type -->
                     <div class="mt-6">
                         <label class="block text-gray-700 font-semibold mb-2">Type de service *</label>
                         <select name="service_type" required
+                            oninvalid="this.setCustomValidity('Veuillez sélectionner le type de service')"
+                            oninput="this.setCustomValidity('')"
                             class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2BD834] focus:border-transparent transition">
                             <option value="ride" {{ old('service_type') === 'ride' ? 'selected' : '' }}>Transport de personnes (Ride)</option>
                             <option value="delivery" {{ old('service_type') === 'delivery' ? 'selected' : '' }}>Livraison (Delivery)</option>
@@ -515,9 +554,11 @@
                     </div>
 
                     <button type="button" @click="step = 4"
-                        class="w-full px-8 py-4 bg-gradient-to-r from-[#2BD834] to-[#22b028] text-white rounded-full font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition duration-200">
+                        class="w-full px-8 py-4 bg-gradient-to-r from-[#2BD834] to-[#22b028] text-white rounded-full font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition duration-200"
+                        onclick="if(!this.closest('form').querySelector('[name=service_type]').checkValidity()) { this.closest('form').querySelector('[name=service_type]').reportValidity(); return false; }">
                         Continuer
                     </button>
+                    </div>
                 </div>
 
                 <!-- Step 4: Documents Upload -->
@@ -529,13 +570,15 @@
                         Retour
                     </button>
 
-                    <h2 class="text-3xl font-bold text-gray-900 mb-2 text-center">
-                        Documents relatif au conducteur et au véhicule
-                    </h2>
-                    <p class="text-gray-600 text-center mb-8">Téléchargez vos documents requis</p>
+                    <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2 flex items-center justify-center">
+                            <span class="w-10 h-10 bg-gradient-to-br from-[#2BD834] to-[#22b028] rounded-full flex items-center justify-center text-white font-bold mr-3">4</span>
+                            Documents requis pour chauffeur de taxi
+                        </h3>
+                        <p class="text-gray-600 text-center mb-8">Veuillez télécharger les 5 documents obligatoires ci-dessous</p>
 
                     <div class="space-y-6">
-                        <!-- Photo de profil -->
+                        <!-- 1. Selfie du conducteur -->
                         <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 hover:border-[#2BD834] transition">
                             <div class="flex items-start">
                                 <div class="flex-shrink-0 mr-4">
@@ -544,34 +587,41 @@
                                     </div>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="font-bold text-gray-900 mb-1">Photo de profil</h3>
-                                    <p class="text-sm text-gray-600 mb-3">Veuillez fournir une photo claire pour que vos passagers puissent vous reconnaître facilement</p>
+                                    <h3 class="font-bold text-gray-900 mb-1">Selfie du taxi</h3>
+                                    <p class="text-sm text-gray-600 mb-3">Une photo claire de votre visage pour identification</p>
                                     <ul class="space-y-2 text-sm mb-4">
                                         <li class="flex items-start">
                                             <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                             </svg>
-                                            <span class="text-gray-700"><strong>Caméra faciale:</strong> Le conducteur doit faire face à la caméra directement, les yeux et la bouche clairement visibles</span>
+                                            <span class="text-gray-700"><strong>Face visible:</strong> Regardez directement la caméra, visage bien éclairé</span>
                                         </li>
                                         <li class="flex items-start">
                                             <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                             </svg>
-                                            <span class="text-gray-700"><strong>Pas de chapeaux, casquettes ou lunettes de soleil:</strong> Le conducteur doit se présenter sans chapeau, casquette ou lunettes de soleil, avec une vue dégagée sur le visage</span>
+                                            <span class="text-gray-700"><strong>Sans accessoires:</strong> Pas de chapeau, casquette ou lunettes de soleil</span>
+                                        </li>
+                                    </ul>
+                                        <li class="flex items-start">
+                                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span class="text-gray-700"><strong>Face visible:</strong> Regardez directement la caméra, visage bien éclairé</span>
                                         </li>
                                         <li class="flex items-start">
                                             <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                             </svg>
-                                            <span class="text-gray-700"><strong>Clair, pas flou:</strong> La photo doit être bien éclairée avec un fond neutre, montrant le visage complet du conducteur</span>
+                                            <span class="text-gray-700"><strong>Sans accessoires:</strong> Pas de chapeau, casquette ou lunettes de soleil</span>
                                         </li>
                                     </ul>
                                     
                                     <!-- File Upload Button (shown when no file) -->
-                                    <div x-show="!files.profile_photo">
-                                        <input type="file" name="profile_photo" accept="image/*" class="hidden" id="profile_photo" 
-                                               @change="previewFile($event.target, 'profile_photo')">
-                                        <label for="profile_photo" class="inline-flex items-center px-6 py-3 bg-purple-600 text-gray-900 rounded-full font-semibold hover:bg-purple-700 transition cursor-pointer">
+                                    <div x-show="!files.selfie">
+                                        <input type="file" name="selfie" accept="image/*" class="hidden" id="selfie" 
+                                               @change="previewFile($event.target, 'selfie')">
+                                        <label for="selfie" class="inline-flex items-center px-6 py-3 bg-purple-600 text-gray-900 rounded-full font-semibold hover:bg-purple-700 transition cursor-pointer">
                                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                             </svg>
@@ -580,10 +630,10 @@
                                     </div>
 
                                     <!-- File Preview (shown when file uploaded) -->
-                                    <div x-show="files.profile_photo" x-transition class="mt-4">
+                                    <div x-show="files.selfie" x-transition class="mt-4">
                                         <div class="flex items-center space-x-4">
                                             <div class="relative">
-                                                <img :src="files.profile_photo?.url" alt="Aper�u" class="w-32 h-32 object-cover rounded-xl border-2 border-gray-200">
+                                                <img :src="files.selfie?.url" alt="Aperçu" class="w-32 h-32 object-cover rounded-xl border-2 border-gray-200">
                                             </div>
                                             <div class="flex-1">
                                                 <div class="flex items-center justify-between bg-green-50 border-2 border-green-500 rounded-xl px-4 py-3">
@@ -593,10 +643,10 @@
                                                         </svg>
                                                         <div>
                                                             <p class="font-semibold text-gray-900">Fichier ajouté</p>
-                                                            <p class="text-sm text-gray-600" x-text="files.profile_photo?.name"></p>
+                                                            <p class="text-sm text-gray-600" x-text="files.selfie?.name"></p>
                                                         </div>
                                                     </div>
-                                                    <button type="button" @click="removeFile('profile_photo')" class="p-2 hover:bg-red-100 rounded-lg transition">
+                                                    <button type="button" @click="removeFile('selfie')" class="p-2 hover:bg-red-100 rounded-lg transition">
                                                         <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                                         </svg>
@@ -616,7 +666,7 @@
                             </div>
                         </div>
 
-                        <!-- Permis de conduire (Recto) -->
+                        <!-- 2. Permis de conduire -->
                         <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 hover:border-[#2BD834] transition">
                             <div class="flex items-start">
                                 <div class="flex-shrink-0 mr-4">
@@ -625,28 +675,28 @@
                                     </div>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="font-bold text-gray-900 mb-1">Permis de conduire (Recto)</h3>
-                                    <p class="text-sm text-gray-600 mb-3">Veuillez fournir une photo claire du document</p>
+                                    <h3 class="font-bold text-gray-900 mb-1">Permis de conduire</h3>
+                                    <p class="text-sm text-gray-600 mb-3">Votre permis de conduire valide (recto et verso visible)</p>
                                     <ul class="space-y-2 text-sm mb-4">
                                         <li class="flex items-start">
                                             <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                             </svg>
-                                            <span class="text-gray-700"><strong>Image claire et lisible:</strong> La photo doit être claire, sans éblouissement ni reflets qui obscurcissent le texte</span>
+                                            <span class="text-gray-700"><strong>Document complet:</strong> Photo claire, tous les détails lisibles</span>
                                         </li>
                                         <li class="flex items-start">
                                             <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                             </svg>
-                                            <span class="text-gray-700"><strong>Bon alignement:</strong> L'ensemble du document doit être visible et aligné correctement dans le cadre</span>
+                                            <span class="text-gray-700"><strong>Valide:</strong> Permis non expiré avec catégorie appropriée</span>
                                         </li>
                                     </ul>
                                     
                                     <!-- File Upload Button (shown when no file) -->
-                                    <div x-show="!files.license_front">
-                                        <input type="file" name="license_front" accept="image/*" class="hidden" id="license_front" 
-                                               @change="previewFile($event.target, 'license_front')">
-                                        <label for="license_front" class="inline-flex items-center px-6 py-3 bg-purple-600 text-gray-900 rounded-full font-semibold hover:bg-purple-700 transition cursor-pointer">
+                                    <div x-show="!files.permis_conduire">
+                                        <input type="file" name="permis_conduire" accept="image/*" class="hidden" id="permis_conduire" 
+                                               @change="previewFile($event.target, 'permis_conduire')">
+                                        <label for="permis_conduire" class="inline-flex items-center px-6 py-3 bg-purple-600 text-gray-900 rounded-full font-semibold hover:bg-purple-700 transition cursor-pointer">
                                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                             </svg>
@@ -655,10 +705,10 @@
                                     </div>
 
                                     <!-- File Preview (shown when file uploaded) -->
-                                    <div x-show="files.license_front" x-transition class="mt-4">
+                                    <div x-show="files.permis_conduire" x-transition class="mt-4">
                                         <div class="flex items-center space-x-4">
                                             <div class="relative">
-                                                <img :src="files.license_front?.url" alt="Aper�u" class="w-32 h-32 object-cover rounded-xl border-2 border-gray-200">
+                                                <img :src="files.permis_conduire?.url" alt="Aperçu" class="w-32 h-32 object-cover rounded-xl border-2 border-gray-200">
                                             </div>
                                             <div class="flex-1">
                                                 <div class="flex items-center justify-between bg-green-50 border-2 border-green-500 rounded-xl px-4 py-3">
@@ -668,10 +718,10 @@
                                                         </svg>
                                                         <div>
                                                             <p class="font-semibold text-gray-900">Fichier ajouté</p>
-                                                            <p class="text-sm text-gray-600" x-text="files.license_front?.name"></p>
+                                                            <p class="text-sm text-gray-600" x-text="files.permis_conduire?.name"></p>
                                                         </div>
                                                     </div>
-                                                    <button type="button" @click="removeFile('license_front')" class="p-2 hover:bg-red-100 rounded-lg transition">
+                                                    <button type="button" @click="removeFile('permis_conduire')" class="p-2 hover:bg-red-100 rounded-lg transition">
                                                         <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                                         </svg>
@@ -691,37 +741,37 @@
                             </div>
                         </div>
 
-                        <!-- Permis de conduire (Verso) -->
+                        <!-- 3. Photo du véhicule taxi -->
                         <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 hover:border-[#2BD834] transition">
                             <div class="flex items-start">
                                 <div class="flex-shrink-0 mr-4">
-                                    <div class="w-16 h-16 bg-pink-100 rounded-xl flex items-center justify-center">
-                                        <span class="text-3xl">🪪</span>
+                                    <div class="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center">
+                                        <span class="text-3xl">🚕</span>
                                     </div>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="font-bold text-gray-900 mb-1">Permis de conduire (Verso)</h3>
-                                    <p class="text-sm text-gray-600 mb-3">Veuillez fournir une photo claire du document</p>
+                                    <h3 class="font-bold text-gray-900 mb-1">Photo du véhicule taxi</h3>
+                                    <p class="text-sm text-gray-600 mb-3">Photo claire de votre taxi avec plaque visible</p>
                                     <ul class="space-y-2 text-sm mb-4">
                                         <li class="flex items-start">
                                             <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                             </svg>
-                                            <span class="text-gray-700"><strong>Image claire et lisible:</strong> La photo doit être claire, sans éblouissement ni reflets qui obscurcissent le texte</span>
+                                            <span class="text-gray-700"><strong>Vue complète:</strong> Plaque d'immatriculation visible</span>
                                         </li>
                                         <li class="flex items-start">
                                             <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                             </svg>
-                                            <span class="text-gray-700"><strong>Bon alignement:</strong> L'ensemble du document doit être visible et aligné correctement dans le cadre</span>
+                                            <span class="text-gray-700"><strong>Bonne qualité:</strong> Photo nette, éclairage suffisant</span>
                                         </li>
                                     </ul>
                                     
                                     <!-- File Upload Button (shown when no file) -->
-                                    <div x-show="!files.license_back">
-                                        <input type="file" name="license_back" accept="image/*" class="hidden" id="license_back" 
-                                               @change="previewFile($event.target, 'license_back')">
-                                        <label for="license_back" class="inline-flex items-center px-6 py-3 bg-purple-600 text-gray-900 rounded-full font-semibold hover:bg-purple-700 transition cursor-pointer">
+                                    <div x-show="!files.photo_vehicule">
+                                        <input type="file" name="photo_vehicule" accept="image/*" class="hidden" id="photo_vehicule" 
+                                               @change="previewFile($event.target, 'photo_vehicule')">
+                                        <label for="photo_vehicule" class="inline-flex items-center px-6 py-3 bg-purple-600 text-gray-900 rounded-full font-semibold hover:bg-purple-700 transition cursor-pointer">
                                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                             </svg>
@@ -730,10 +780,10 @@
                                     </div>
 
                                     <!-- File Preview (shown when file uploaded) -->
-                                    <div x-show="files.license_back" x-transition class="mt-4">
+                                    <div x-show="files.photo_vehicule" x-transition class="mt-4">
                                         <div class="flex items-center space-x-4">
                                             <div class="relative">
-                                                <img :src="files.license_back?.url" alt="Aper�u" class="w-32 h-32 object-cover rounded-xl border-2 border-gray-200">
+                                                <img :src="files.photo_vehicule?.url" alt="Aperçu" class="w-32 h-32 object-cover rounded-xl border-2 border-gray-200">
                                             </div>
                                             <div class="flex-1">
                                                 <div class="flex items-center justify-between bg-green-50 border-2 border-green-500 rounded-xl px-4 py-3">
@@ -743,10 +793,10 @@
                                                         </svg>
                                                         <div>
                                                             <p class="font-semibold text-gray-900">Fichier ajouté</p>
-                                                            <p class="text-sm text-gray-600" x-text="files.license_back?.name"></p>
+                                                            <p class="text-sm text-gray-600" x-text="files.photo_vehicule?.name"></p>
                                                         </div>
                                                     </div>
-                                                    <button type="button" @click="removeFile('license_back')" class="p-2 hover:bg-red-100 rounded-lg transition">
+                                                    <button type="button" @click="removeFile('photo_vehicule')" class="p-2 hover:bg-red-100 rounded-lg transition">
                                                         <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                                         </svg>
@@ -766,300 +816,148 @@
                             </div>
                         </div>
 
-                        <div x-show="hasVehicle">
-                            <!-- Carte Grise (Recto) -->
-                            <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 hover:border-[#2BD834] transition">
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0 mr-4">
-                                        <div class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center">
-                                            <span class="text-3xl">📄</span>
-                                        </div>
+                        <!-- 4. Carte grise (Certificat d'immatriculation) -->
+                        <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 hover:border-[#2BD834] transition">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mr-4">
+                                    <div class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center">
+                                        <span class="text-3xl">📄</span>
                                     </div>
-                                    <div class="flex-1">
-                                        <h3 class="font-bold text-gray-900 mb-1">Carte Grise (Recto)</h3>
-                                        <p class="text-sm text-gray-600 mb-3">Veuillez fournir une photo nette et lisible de la carte grise</p>
-                                        <ul class="space-y-2 text-sm mb-4">
-                                            <li class="flex items-start">
-                                                <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span class="text-gray-700"><strong>Document complet:</strong> L'ensemble du document doit être visible. Il ne doit manquer aucune partie</span>
-                                            </li>
-                                            <li class="flex items-start">
-                                                <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span class="text-gray-700"><strong>Bon alignement:</strong> Assurez-vous que la carte grise soit bien alignée dans le cadre de la photo. Évitez toute inclinaison qui pourrait rendre certaines informations illisibles</span>
-                                            </li>
-                                        </ul>
-                                        
-                                        <!-- File Upload Button (shown when no file) -->
-                                        <div x-show="!files.vehicle_registration_front">
-                                            <input type="file" name="vehicle_registration_front" accept="image/*" class="hidden" id="vehicle_registration_front" 
-                                                   @change="previewFile($event.target, 'vehicle_registration_front')">
-                                            <label for="vehicle_registration_front" class="inline-flex items-center px-6 py-3 bg-purple-600 text-gray-900 rounded-full font-semibold hover:bg-purple-700 transition cursor-pointer">
-                                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                                </svg>
-                                                Ajouter depuis mon appareil
-                                            </label>
-                                        </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-bold text-gray-900 mb-1">Carte grise (Certificat d'immatriculation)</h3>
+                                    <p class="text-sm text-gray-600 mb-3">Document officiel d'immatriculation du véhicule</p>
+                                    <ul class="space-y-2 text-sm mb-4">
+                                        <li class="flex items-start">
+                                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span class="text-gray-700"><strong>Document complet:</strong> Recto et verso lisibles</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span class="text-gray-700"><strong>À jour:</strong> Certificat valide et à votre nom</span>
+                                        </li>
+                                    </ul>
+                                    
+                                    <!-- File Upload Button (shown when no file) -->
+                                    <div x-show="!files.carte_grise">
+                                        <input type="file" name="carte_grise" accept="image/*" class="hidden" id="carte_grise" 
+                                               @change="previewFile($event.target, 'carte_grise')">
+                                        <label for="carte_grise" class="inline-flex items-center px-6 py-3 bg-purple-600 text-gray-900 rounded-full font-semibold hover:bg-purple-700 transition cursor-pointer">
+                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                            </svg>
+                                            Ajouter depuis mon appareil
+                                        </label>
+                                    </div>
 
-                                        <!-- File Preview (shown when file uploaded) -->
-                                        <div x-show="files.vehicle_registration_front" x-transition class="mt-4">
-                                            <div class="flex items-center space-x-4">
-                                                <div class="relative">
-                                                    <img :src="files.vehicle_registration_front?.url" alt="Aper�u" class="w-32 h-32 object-cover rounded-xl border-2 border-gray-200">
-                                                </div>
-                                                <div class="flex-1">
-                                                    <div class="flex items-center justify-between bg-green-50 border-2 border-green-500 rounded-xl px-4 py-3">
-                                                        <div class="flex items-center space-x-3">
-                                                            <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                            </svg>
-                                                            <div>
-                                                                <p class="font-semibold text-gray-900">Fichier ajouté</p>
-                                                                <p class="text-sm text-gray-600" x-text="files.vehicle_registration_front?.name"></p>
-                                                            </div>
-                                                        </div>
-                                                        <button type="button" @click="removeFile('vehicle_registration_front')" class="p-2 hover:bg-red-100 rounded-lg transition">
-                                                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                    <div class="mt-2 flex items-center text-sm text-gray-600">
-                                                        <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                                                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                                    <!-- File Preview (shown when file uploaded) -->
+                                    <div x-show="files.carte_grise" x-transition class="mt-4">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="relative">
+                                                <img :src="files.carte_grise?.url" alt="Aperçu" class="w-32 h-32 object-cover rounded-xl border-2 border-gray-200">
+                                            </div>
+                                            <div class="flex-1">
+                                                <div class="flex items-center justify-between bg-green-50 border-2 border-green-500 rounded-xl px-4 py-3">
+                                                    <div class="flex items-center space-x-3">
+                                                        <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                                         </svg>
-                                                        Aperçu disponible
+                                                        <div>
+                                                            <p class="font-semibold text-gray-900">Fichier ajouté</p>
+                                                            <p class="text-sm text-gray-600" x-text="files.carte_grise?.name"></p>
+                                                        </div>
                                                     </div>
+                                                    <button type="button" @click="removeFile('carte_grise')" class="p-2 hover:bg-red-100 rounded-lg transition">
+                                                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                <div class="mt-2 flex items-center text-sm text-gray-600">
+                                                    <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                                                    </svg>
+                                                    Aperçu disponible
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Carte Grise (Verso) -->
-                            <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 hover:border-[#2BD834] transition">
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0 mr-4">
-                                        <div class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center">
-                                            <span class="text-3xl">📄</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h3 class="font-bold text-gray-900 mb-1">Carte Grise (Verso)</h3>
-                                        <p class="text-sm text-gray-600 mb-3">Veuillez fournir une photo nette et lisible de la carte grise</p>
-                                        <ul class="space-y-2 text-sm mb-4">
-                                            <li class="flex items-start">
-                                                <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span class="text-gray-700"><strong>Document complet:</strong> L'ensemble du document doit être visible. Il ne doit manquer aucune partie</span>
-                                            </li>
-                                            <li class="flex items-start">
-                                                <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span class="text-gray-700"><strong>Bon alignement:</strong> Assurez-vous que la carte grise soit bien alignée dans le cadre de la photo</span>
-                                            </li>
-                                        </ul>
-                                        
-                                        <!-- File Upload Button (shown when no file) -->
-                                        <div x-show="!files.vehicle_registration_back">
-                                            <input type="file" name="vehicle_registration_back" accept="image/*" class="hidden" id="vehicle_registration_back" 
-                                                   @change="previewFile($event.target, 'vehicle_registration_back')">
-                                            <label for="vehicle_registration_back" class="inline-flex items-center px-6 py-3 bg-purple-600 text-gray-900 rounded-full font-semibold hover:bg-purple-700 transition cursor-pointer">
-                                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                                </svg>
-                                                Ajouter depuis mon appareil
-                                            </label>
-                                        </div>
-
-                                        <!-- File Preview (shown when file uploaded) -->
-                                        <div x-show="files.vehicle_registration_back" x-transition class="mt-4">
-                                            <div class="flex items-center space-x-4">
-                                                <div class="relative">
-                                                    <img :src="files.vehicle_registration_back?.url" alt="Aper�u" class="w-32 h-32 object-cover rounded-xl border-2 border-gray-200">
-                                                </div>
-                                                <div class="flex-1">
-                                                    <div class="flex items-center justify-between bg-green-50 border-2 border-green-500 rounded-xl px-4 py-3">
-                                                        <div class="flex items-center space-x-3">
-                                                            <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                            </svg>
-                                                            <div>
-                                                                <p class="font-semibold text-gray-900">Fichier ajouté</p>
-                                                                <p class="text-sm text-gray-600" x-text="files.vehicle_registration_back?.name"></p>
-                                                            </div>
-                                                        </div>
-                                                        <button type="button" @click="removeFile('vehicle_registration_back')" class="p-2 hover:bg-red-100 rounded-lg transition">
-                                                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                    <div class="mt-2 flex items-center text-sm text-gray-600">
-                                                        <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                                                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
-                                                        </svg>
-                                                        Aperçu disponible
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                        <!-- 5. Licence de taxi -->
+                        <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 hover:border-[#2BD834] transition">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mr-4">
+                                    <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center">
+                                        <span class="text-3xl">📋</span>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Photo du véhicule (de face) -->
-                            <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 hover:border-[#2BD834] transition">
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0 mr-4">
-                                        <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center">
-                                            <span class="text-3xl">🚗</span>
-                                        </div>
+                                <div class="flex-1">
+                                    <h3 class="font-bold text-gray-900 mb-1">Licence de taxi</h3>
+                                    <p class="text-sm text-gray-600 mb-3">Votre licence officielle d'exploitation de taxi</p>
+                                    <ul class="space-y-2 text-sm mb-4">
+                                        <li class="flex items-start">
+                                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span class="text-gray-700"><strong>Document officiel:</strong> Licence valide délivrée par les autorités</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span class="text-gray-700"><strong>En cours de validité:</strong> Tous les détails clairement visibles</span>
+                                        </li>
+                                    </ul>
+                                    
+                                    <!-- File Upload Button (shown when no file) -->
+                                    <div x-show="!files.licence_taxi">
+                                        <input type="file" name="licence_taxi" accept="image/*" class="hidden" id="licence_taxi" 
+                                               @change="previewFile($event.target, 'licence_taxi')">
+                                        <label for="licence_taxi" class="inline-flex items-center px-6 py-3 bg-purple-600 text-gray-900 rounded-full font-semibold hover:bg-purple-700 transition cursor-pointer">
+                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                            </svg>
+                                            Ajouter depuis mon appareil
+                                        </label>
                                     </div>
-                                    <div class="flex-1">
-                                        <h3 class="font-bold text-gray-900 mb-1">Photo du véhicule (de face)</h3>
-                                        <p class="text-sm text-gray-600 mb-3">Veuillez fournir une photo de votre véhicule vu de l'avant</p>
-                                        <ul class="space-y-2 text-sm mb-4">
-                                            <li class="flex items-start">
-                                                <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span class="text-gray-700"><strong>Vue de face avec plaque d'immatriculation visible:</strong> La voiture doit être photographiée de face, avec la plaque d'immatriculation visible</span>
-                                            </li>
-                                            <li class="flex items-start">
-                                                <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span class="text-gray-700"><strong>Bon alignement:</strong> La voiture doit être cadrée correctement, montrant tout l'avant de la voiture sans obstruction (par exemple, aucun autre véhicule ne bloque la vue)</span>
-                                            </li>
-                                        </ul>
-                                        
-                                        <!-- File Upload Button (shown when no file) -->
-                                        <div x-show="!files.vehicle_photo_front">
-                                            <input type="file" name="vehicle_photo_front" accept="image/*" class="hidden" id="vehicle_photo_front" 
-                                                   @change="previewFile($event.target, 'vehicle_photo_front')">
-                                            <label for="vehicle_photo_front" class="inline-flex items-center px-6 py-3 bg-purple-600 text-gray-900 rounded-full font-semibold hover:bg-purple-700 transition cursor-pointer">
-                                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                                </svg>
-                                                Ajouter depuis mon appareil
-                                            </label>
-                                        </div>
 
-                                        <!-- File Preview (shown when file uploaded) -->
-                                        <div x-show="files.vehicle_photo_front" x-transition class="mt-4">
-                                            <div class="flex items-center space-x-4">
-                                                <div class="relative">
-                                                    <img :src="files.vehicle_photo_front?.url" alt="Aperçu photo véhicule" class="w-32 h-32 object-cover rounded-xl border-2 border-gray-200">
-                                                </div>
-                                                <div class="flex-1">
-                                                    <div class="flex items-center justify-between bg-green-50 border-2 border-green-500 rounded-xl px-4 py-3">
-                                                        <div class="flex items-center space-x-3">
-                                                            <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                            </svg>
-                                                            <div>
-                                                                <p class="font-semibold text-gray-900">Fichier ajouté</p>
-                                                                <p class="text-sm text-gray-600" x-text="files.vehicle_photo_front?.name"></p>
-                                                            </div>
-                                                        </div>
-                                                        <button type="button" @click="removeFile('vehicle_photo_front')" class="p-2 hover:bg-red-100 rounded-lg transition">
-                                                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                    <div class="mt-2 flex items-center text-sm text-gray-600">
-                                                        <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                                                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
-                                                        </svg>
-                                                        Aperçu disponible
-                                                    </div>
-                                                </div>
+                                    <!-- File Preview (shown when file uploaded) -->
+                                    <div x-show="files.licence_taxi" x-transition class="mt-4">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="relative">
+                                                <img :src="files.licence_taxi?.url" alt="Aperçu" class="w-32 h-32 object-cover rounded-xl border-2 border-gray-200">
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Photo du véhicule (de profil) -->
-                            <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 hover:border-[#2BD834] transition">
-                                <div class="flex items-start">
-                                    <div class="flex-shrink-0 mr-4">
-                                        <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center">
-                                            <span class="text-3xl">🚗</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h3 class="font-bold text-gray-900 mb-1">Photo du véhicule (de profil)</h3>
-                                        <p class="text-sm text-gray-600 mb-3">Veuillez fournir une photo de votre véhicule vu de côté</p>
-                                        <ul class="space-y-2 text-sm mb-4">
-                                            <li class="flex items-start">
-                                                <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span class="text-gray-700"><strong>Vue latérale avec les deux portes visibles:</strong> La voiture doit être photographiée de côté, avec les deux portières visibles</span>
-                                            </li>
-                                            <li class="flex items-start">
-                                                <svg class="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span class="text-gray-700"><strong>Bon alignement:</strong> La voiture doit être cadrée correctement, montrant les deux côtés de la voiture sans obstruction (par exemple, aucun autre véhicule ne doit bloquer la vue)</span>
-                                            </li>
-                                        </ul>
-                                        
-                                        <!-- File Upload Button (shown when no file) -->
-                                        <div x-show="!files.vehicle_photo_side">
-                                            <input type="file" name="vehicle_photo_side" accept="image/*" class="hidden" id="vehicle_photo_side" 
-                                                   @change="previewFile($event.target, 'vehicle_photo_side')">
-                                            <label for="vehicle_photo_side" class="inline-flex items-center px-6 py-3 bg-purple-600 text-gray-900 rounded-full font-semibold hover:bg-purple-700 transition cursor-pointer">
-                                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                                </svg>
-                                                Ajouter depuis mon appareil
-                                            </label>
-                                        </div>
-
-                                        <!-- File Preview (shown when file uploaded) -->
-                                        <div x-show="files.vehicle_photo_side" x-transition class="mt-4">
-                                            <div class="flex items-center space-x-4">
-                                                <div class="relative">
-                                                    <img :src="files.vehicle_photo_side?.url" alt="Aperçu photo véhicule" class="w-32 h-32 object-cover rounded-xl border-2 border-gray-200">
-                                                </div>
-                                                <div class="flex-1">
-                                                    <div class="flex items-center justify-between bg-green-50 border-2 border-green-500 rounded-xl px-4 py-3">
-                                                        <div class="flex items-center space-x-3">
-                                                            <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                                            </svg>
-                                                            <div>
-                                                                <p class="font-semibold text-gray-900">Fichier ajouté</p>
-                                                                <p class="text-sm text-gray-600" x-text="files.vehicle_photo_side?.name"></p>
-                                                            </div>
-                                                        </div>
-                                                        <button type="button" @click="removeFile('vehicle_photo_side')" class="p-2 hover:bg-red-100 rounded-lg transition">
-                                                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                    <div class="mt-2 flex items-center text-sm text-gray-600">
-                                                        <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                                                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                                            <div class="flex-1">
+                                                <div class="flex items-center justify-between bg-green-50 border-2 border-green-500 rounded-xl px-4 py-3">
+                                                    <div class="flex items-center space-x-3">
+                                                        <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                                         </svg>
-                                                        Aperçu disponible
+                                                        <div>
+                                                            <p class="font-semibold text-gray-900">Fichier ajouté</p>
+                                                            <p class="text-sm text-gray-600" x-text="files.licence_taxi?.name"></p>
+                                                        </div>
                                                     </div>
+                                                    <button type="button" @click="removeFile('licence_taxi')" class="p-2 hover:bg-red-100 rounded-lg transition">
+                                                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                                <div class="mt-2 flex items-center text-sm text-gray-600">
+                                                    <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                                                    </svg>
+                                                    Aperçu disponible
                                                 </div>
                                             </div>
                                         </div>
@@ -1068,24 +966,88 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Submit Button (visible only on step 4) -->
-                <div x-show="step === 4" x-transition class="mt-8">
-                    <button type="submit"
-                        class="w-full px-8 py-4 bg-gradient-to-r from-[#2BD834] to-[#22b028] text-white rounded-full font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition duration-200 shadow-lg">
-                        <span class="flex items-center justify-center">
-                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Soumettre ma candidature
-                        </span>
-                    </button>
+                    <!-- Submit Button (visible only on step 4) -->
+                    <div class="mt-8">
+                        <button type="submit"
+                            onclick="return validateAllSteps()"
+                            class="w-full px-8 py-4 bg-gradient-to-r from-[#2BD834] to-[#22b028] text-white rounded-full font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition duration-200 shadow-lg">
+                            <span class="flex items-center justify-center">
+                                <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Soumettre ma candidature
+                            </span>
+                        </button>
+                    </div>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 </section>
+
+<script>
+function validateAllSteps() {
+    const form = document.querySelector('form');
+    
+    // Étape 1: Informations personnelles
+    const step1Fields = ['gender', 'first_name', 'last_name', 'date_of_birth', 'email', 'phone'];
+    for (let fieldName of step1Fields) {
+        const field = form.querySelector(`[name="${fieldName}"]`);
+        if (field && !field.checkValidity()) {
+            // Retourner à l'étape 1
+            window.dispatchEvent(new CustomEvent('set-step', { detail: 1 }));
+            setTimeout(() => field.reportValidity(), 100);
+            return false;
+        }
+    }
+    
+    // Étape 2: Localisation
+    const step2Fields = ['region', 'city'];
+    for (let fieldName of step2Fields) {
+        const field = form.querySelector(`[name="${fieldName}"]`);
+        if (field && !field.checkValidity()) {
+            // Retourner à l'étape 2
+            window.dispatchEvent(new CustomEvent('set-step', { detail: 2 }));
+            setTimeout(() => field.reportValidity(), 100);
+            return false;
+        }
+    }
+    
+    // Étape 3: Type de service
+    const serviceField = form.querySelector('[name="service_type"]');
+    if (serviceField && !serviceField.checkValidity()) {
+        // Retourner à l'étape 3
+        window.dispatchEvent(new CustomEvent('set-step', { detail: 3 }));
+        setTimeout(() => serviceField.reportValidity(), 100);
+        return false;
+    }
+    
+    return true;
+}
+</script>
+
+<!-- Custom Animation Styles -->
+<style>
+    @keyframes particle {
+        0% { transform: translateY(0) translateX(0); opacity: 0; }
+        10% { opacity: 0.5; }
+        50% { opacity: 0.3; }
+        90% { opacity: 0.5; }
+        100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+    }
+    
+    .animate-particle {
+        animation: particle 15s linear infinite;
+    }
+    
+    /* Hover effect on form container */
+    .bg-white\/90:hover {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        transition: box-shadow 0.3s ease;
+    }
+</style>
 
 <!-- AOS Animation Library -->
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -1098,5 +1060,4 @@
 </script>
 
 @endsection
-
 

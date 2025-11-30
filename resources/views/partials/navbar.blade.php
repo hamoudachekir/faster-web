@@ -88,7 +88,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                     </svg>
                                     <div>
-                                        <div class="font-semibold text-gray-900">Devenir Conducteur</div>
+                                        <div class="font-semibold text-gray-900">Devenir Taxi</div>
                                         <div class="text-sm text-gray-600">Rejoignez notre équipe</div>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                     </svg>
                                     <div>
-                                        <div class="font-semibold text-gray-900">Devenir Partenaire</div>
+                                        <div class="font-semibold text-gray-900">Faster Business</div>
                                         <div class="text-sm text-gray-600">Développez votre activité</div>
                                     </div>
                                 </div>
@@ -388,8 +388,8 @@
             @guest
             <div>
                 <div class="font-semibold text-gray-900 mb-2">Rejoindre</div>
-                <a href="{{ route('join.driver') }}" class="block pl-4 py-2 text-gray-600">Devenir Conducteur</a>
-                <a href="{{ route('join.partner') }}" class="block pl-4 py-2 text-gray-600">Devenir Partenaire</a>
+                <a href="{{ route('join.driver') }}" class="block pl-4 py-2 text-gray-600">Devenir Taxi</a>
+                <a href="{{ route('join.partner') }}" class="block pl-4 py-2 text-gray-600">Faster Business</a>
             </div>
             @endguest
             @if(!session('driver_id') && !session('partner_id'))

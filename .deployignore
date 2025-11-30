@@ -1,0 +1,53 @@
+# Files to exclude when deploying to production server
+
+# Dependencies
+/node_modules
+/vendor
+
+# Development files
+.git/
+.gitignore
+.gitattributes
+.editorconfig
+
+# Environment
+.env
+.env.backup
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts (build locally, then upload)
+# Uncomment if you want to build on server instead
+# /public/hot
+# /public/storage
+# /public/build
+
+# Logs
+/storage/logs/*
+!/storage/logs/.gitignore
+
+# Testing
+.phpunit.result.cache
+/coverage
+
+# Documentation
+*.md
+!README.md
+
+# Scripts
+setup.php
+
+# Temporary files
+*.log
+*.tmp
+*.cache

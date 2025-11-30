@@ -91,15 +91,16 @@
                 <div class="flex flex-col items-center text-center">
                     <!-- Profile Photo -->
                     <div class="mb-6">
-                        @if($application->profile_photo)
-                            <img src="{{ asset('storage/' . $application->profile_photo) }}" alt="Portrait du conducteur" class="w-40 h-40 rounded-full object-cover border-4 border-gray-100 shadow-lg">
+                        @if($application->selfie)
+                            <img src="{{ asset('storage/' . $application->selfie) }}" alt="Portrait du conducteur" class="w-40 h-40 rounded-full object-cover border-4 border-gray-100 shadow-lg">
                         @else
                             <div class="w-40 h-40 rounded-full bg-gray-100 flex items-center justify-center text-6xl border-4 border-gray-100">{{ $application->gender === 'male' ? '👨' : '👩' }}</div>
                         @endif
                     </div>
 
                     <!-- Name & Status -->
-                    <h2 class="text-3xl font-bold text-gray-900 mb-3">{{ $application->first_name }} {{ $application->last_name }}</h2>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">{{ $application->first_name }} {{ $application->last_name }}</h2>
+                    <p class="text-sm text-gray-600 mb-4">{{ $application->gender === 'male' ? '👨 Homme' : '👩 Femme' }} • {{ $application->date_of_birth ? \Carbon\Carbon::parse($application->date_of_birth)->age . ' ans' : 'Âge non renseigné' }}</p>
                     <span class="px-4 py-2 rounded-full text-sm font-bold mb-6
                         {{ $application->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
                         {{ $application->status === 'approved' ? 'bg-green-100 text-green-800' : '' }}
@@ -178,36 +179,41 @@
             <!-- Vehicle & Service Info -->
             <div class="bg-white rounded-2xl shadow-lg p-6">
                 <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                    <span class="text-2xl mr-2">🚗</span> Véhicule & Service
+                    <span class="text-2xl mr-2">🚕</span> Informations Taxi
                 </h3>
                 <div class="space-y-4">
                     <div>
                         <p class="text-sm text-gray-600 mb-1">Type de service</p>
                         <p class="text-gray-900 font-medium">
-                            @if($application->service_type === 'ride') 🚗 Transport de personnes
-                            @elseif($application->service_type === 'delivery') 📦 Livraison
-                            @else 🚗📦 Les deux @endif
+                            @if($application->service_type === 'ride') 🚗 Transport de personnes (Ride)
+                            @elseif($application->service_type === 'delivery') 📦 Livraison (Delivery)
+                            @else 🚗📦 Transport + Livraison @endif
                         </p>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-600 mb-1">Type de véhicule</p>
-                        <p class="text-gray-900 font-medium">{{ $application->vehicle_type ?: 'Non renseigné' }}</p>
+                        <p class="text-sm text-gray-600 mb-1">Permis de conduire valide</p>
+                        <p class="text-gray-900 font-medium">{{ $application->has_license ? '✅ Oui (+2 ans)' : '❌ Non' }}</p>
                     </div>
+                    @if($application->license_number)
                     <div>
                         <p class="text-sm text-gray-600 mb-1">Numéro de permis</p>
-                        <p class="text-gray-900 font-medium">{{ $application->license_number ?: 'Non renseigné' }}</p>
+                        <p class="text-gray-900 font-medium">{{ $application->license_number }}</p>
                     </div>
-                    <div>
-                        <p class="text-sm text-gray-600 mb-1">Possède un véhicule</p>
-                        <p class="text-gray-900 font-medium">{{ $application->has_vehicle ? '✅ Oui' : '❌ Non' }}</p>
-                    </div>
-                    @if($application->has_vehicle && ($application->vehicle_brand || $application->vehicle_model))
+                    @endif
                     <div class="border-t border-gray-200 pt-4">
-                        <p class="text-sm text-gray-600 mb-3 font-semibold">Détails du véhicule</p>
-                        @if($application->vehicle_brand || $application->vehicle_model)
+                        <p class="text-sm text-gray-600 mb-3 font-semibold flex items-center gap-2">
+                            <span class="text-lg">🚕</span> Véhicule Taxi
+                        </p>
+                        @if($application->vehicle_brand)
                         <div class="mb-2">
-                            <p class="text-xs text-gray-600">Marque / Modèle</p>
-                            <p class="text-gray-900 font-medium">{{ $application->vehicle_brand ?: '—' }} {{ $application->vehicle_model ?: '' }}</p>
+                            <p class="text-xs text-gray-600">Marque</p>
+                            <p class="text-gray-900 font-medium">{{ $application->vehicle_brand }}</p>
+                        </div>
+                        @endif
+                        @if($application->vehicle_model)
+                        <div class="mb-2">
+                            <p class="text-xs text-gray-600">Modèle</p>
+                            <p class="text-gray-900 font-medium">{{ $application->vehicle_model }}</p>
                         </div>
                         @endif
                         @if($application->vehicle_year)
@@ -217,13 +223,15 @@
                         </div>
                         @endif
                         @if($application->license_plate)
-                        <div>
+                        <div class="mb-2">
                             <p class="text-xs text-gray-600">Plaque d'immatriculation</p>
-                            <p class="text-gray-900 font-medium">{{ $application->license_plate }}</p>
+                            <p class="text-gray-900 font-medium bg-yellow-50 border-2 border-yellow-300 px-3 py-2 rounded-lg inline-block font-bold">{{ $application->license_plate }}</p>
                         </div>
                         @endif
+                        @if(!$application->vehicle_brand && !$application->vehicle_model && !$application->vehicle_year && !$application->license_plate)
+                        <p class="text-sm text-gray-500 italic">Informations du véhicule non renseignées</p>
+                        @endif
                     </div>
-                    @endif
                 </div>
             </div>
 
@@ -237,42 +245,50 @@
 
         <!-- Middle: Documents & Photos -->
         <div class="space-y-6">
-            <!-- Documents -->
+            <!-- Documents taxi spécifiques -->
             <div class="bg-white rounded-2xl shadow-lg p-6">
                 <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                    <span class="text-2xl mr-2">�</span> Documents
+                    <span class="text-2xl mr-2">📋</span> Documents du taxi
                 </h3>
-                @if($application->license_front || $application->license_back || $application->vehicle_registration_front || $application->vehicle_registration_back)
+                @if($application->selfie || $application->permis_conduire || $application->photo_vehicule || $application->carte_grise || $application->licence_taxi)
                 <div class="space-y-4">
-                    @if($application->license_front)
+                    @if($application->selfie)
                     <div>
-                        <p class="text-sm font-semibold text-gray-700 mb-2">🪪 Permis de conduire (Recto)</p>
-                        <a href="{{ asset('storage/' . $application->license_front) }}" target="_blank" class="block">
-                            <img src="{{ asset('storage/' . $application->license_front) }}" alt="Permis recto" class="w-full h-48 object-cover rounded-lg border-2 border-gray-200 hover:border-[#2BD834] hover:shadow-lg transition cursor-pointer">
+                        <p class="text-sm font-semibold text-gray-700 mb-2">📷 Selfie du conducteur</p>
+                        <a href="{{ asset('storage/' . $application->selfie) }}" target="_blank" class="block">
+                            <img src="{{ asset('storage/' . $application->selfie) }}" alt="Selfie conducteur" class="w-full h-48 object-cover rounded-lg border-2 border-gray-200 hover:border-[#2BD834] hover:shadow-lg transition cursor-pointer">
                         </a>
                     </div>
                     @endif
-                    @if($application->license_back)
+                    @if($application->permis_conduire)
                     <div>
-                        <p class="text-sm font-semibold text-gray-700 mb-2">🪪 Permis de conduire (Verso)</p>
-                        <a href="{{ asset('storage/' . $application->license_back) }}" target="_blank" class="block">
-                            <img src="{{ asset('storage/' . $application->license_back) }}" alt="Permis verso" class="w-full h-48 object-cover rounded-lg border-2 border-gray-200 hover:border-[#2BD834] hover:shadow-lg transition cursor-pointer">
+                        <p class="text-sm font-semibold text-gray-700 mb-2">🪪 Permis de conduire</p>
+                        <a href="{{ asset('storage/' . $application->permis_conduire) }}" target="_blank" class="block">
+                            <img src="{{ asset('storage/' . $application->permis_conduire) }}" alt="Permis de conduire" class="w-full h-48 object-cover rounded-lg border-2 border-gray-200 hover:border-[#2BD834] hover:shadow-lg transition cursor-pointer">
                         </a>
                     </div>
                     @endif
-                    @if($application->vehicle_registration_front)
+                    @if($application->photo_vehicule)
                     <div>
-                        <p class="text-sm font-semibold text-gray-700 mb-2">📋 Carte grise (Recto)</p>
-                        <a href="{{ asset('storage/' . $application->vehicle_registration_front) }}" target="_blank" class="block">
-                            <img src="{{ asset('storage/' . $application->vehicle_registration_front) }}" alt="Carte grise recto" class="w-full h-48 object-cover rounded-lg border-2 border-gray-200 hover:border-[#2BD834] hover:shadow-lg transition cursor-pointer">
+                        <p class="text-sm font-semibold text-gray-700 mb-2">🚕 Photo du véhicule taxi</p>
+                        <a href="{{ asset('storage/' . $application->photo_vehicule) }}" target="_blank" class="block">
+                            <img src="{{ asset('storage/' . $application->photo_vehicule) }}" alt="Photo véhicule" class="w-full h-48 object-cover rounded-lg border-2 border-gray-200 hover:border-[#2BD834] hover:shadow-lg transition cursor-pointer">
                         </a>
                     </div>
                     @endif
-                    @if($application->vehicle_registration_back)
+                    @if($application->carte_grise)
                     <div>
-                        <p class="text-sm font-semibold text-gray-700 mb-2">📋 Carte grise (Verso)</p>
-                        <a href="{{ asset('storage/' . $application->vehicle_registration_back) }}" target="_blank" class="block">
-                            <img src="{{ asset('storage/' . $application->vehicle_registration_back) }}" alt="Carte grise verso" class="w-full h-48 object-cover rounded-lg border-2 border-gray-200 hover:border-[#2BD834] hover:shadow-lg transition cursor-pointer">
+                        <p class="text-sm font-semibold text-gray-700 mb-2">📄 Carte grise (Certificat d'immatriculation)</p>
+                        <a href="{{ asset('storage/' . $application->carte_grise) }}" target="_blank" class="block">
+                            <img src="{{ asset('storage/' . $application->carte_grise) }}" alt="Carte grise" class="w-full h-48 object-cover rounded-lg border-2 border-gray-200 hover:border-[#2BD834] hover:shadow-lg transition cursor-pointer">
+                        </a>
+                    </div>
+                    @endif
+                    @if($application->licence_taxi)
+                    <div>
+                        <p class="text-sm font-semibold text-gray-700 mb-2">📋 Licence de taxi</p>
+                        <a href="{{ asset('storage/' . $application->licence_taxi) }}" target="_blank" class="block">
+                            <img src="{{ asset('storage/' . $application->licence_taxi) }}" alt="Licence taxi" class="w-full h-48 object-cover rounded-lg border-2 border-gray-200 hover:border-[#2BD834] hover:shadow-lg transition cursor-pointer">
                         </a>
                     </div>
                     @endif
@@ -283,27 +299,6 @@
                 </div>
                 @endif
             </div>
-
-            <!-- Vehicle Photos -->
-            @if($application->vehicle_photo_front || $application->vehicle_photo_side)
-            <div class="bg-white rounded-2xl shadow-lg p-6">
-                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center"><span class="text-2xl mr-2">📷</span> Photos du véhicule</h3>
-                <div class="space-y-4">
-                    @if($application->vehicle_photo_front)
-                    <div>
-                        <p class="text-sm font-semibold text-gray-700 mb-2">Vue de face</p>
-                        <img src="{{ asset('storage/' . $application->vehicle_photo_front) }}" alt="Véhicule (vue de face)" class="w-full h-48 object-cover rounded-lg border-2 border-gray-200">
-                    </div>
-                    @endif
-                    @if($application->vehicle_photo_side)
-                    <div>
-                        <p class="text-sm font-semibold text-gray-700 mb-2">Vue de profil</p>
-                        <img src="{{ asset('storage/' . $application->vehicle_photo_side) }}" alt="Véhicule (vue de profil)" class="w-full h-48 object-cover rounded-lg border-2 border-gray-200">
-                    </div>
-                    @endif
-                </div>
-            </div>
-            @endif
         </div>
 
         <!-- Right: Actions & Notes -->
